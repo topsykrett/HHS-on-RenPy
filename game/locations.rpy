@@ -1,6 +1,5 @@
 init 10 python:
     locations = []
-    
     class Location:
         def __init__(self,id,name,base_prob, position):
             self.id = id
@@ -69,37 +68,51 @@ init 10 python:
             locations.append(loc)
             
     getEvents() #добавляю всем эвенты
-
+    
+######################################################
+#Объявление всех картинок
 init:
     image home = im.FactorScale('pic/locations/home/1.jpg', 1.5)
     image bedroom = im.FactorScale('pic/locations/home/2.jpg', 1.5)
     image bathroom = im.FactorScale('pic/locations/home/3.jpg', 1.5)
     image kitchen = im.FactorScale('pic/locations/home/4.jpg', 1.5)
-    image street_day = im.FactorScale('pic/locations/street/1.jpg', 1.5)
-    image street_night = im.FactorScale('pic/locations/street/2.jpg', 1.5)
-    image beach_day = im.FactorScale('pic/locations/beach/1.jpg', 1.5)
-    image beach_night = im.FactorScale('pic/locations/beach/2.jpg', 1.5)
-    image beachChange_day = im.FactorScale('pic/locations/beach/changeRoom/1.jpg', 1.5)
-    image beachChange_night = im.FactorScale('pic/locations/beach/changeRoom/2.jpg', 1.5)   
-    image shopStreet_day = im.FactorScale('pic/locations/shopStreet/1.jpg', 1.5)
-    image shopStreet_night = im.FactorScale('pic/locations/shopStreet/2.jpg', 1.5)
+    image street = ConditionSwitch(
+        "hour >= 5 and hour <= 20", im.FactorScale("pic/locations/street/1.jpg",1.5),
+        "hour > 20 or hour < 5", im.FactorScale("pic/locations/street/2.jpg",1.5),
+        )
+    image beach = ConditionSwitch(
+        "hour >= 5 and hour <= 20", im.FactorScale("pic/locations/beach/1.jpg",1.5),
+        "hour > 20 or hour < 5", im.FactorScale("pic/locations/beach/2.jpg",1.5),
+        )
+    image shopStreet = ConditionSwitch(
+        "hour >= 5 and hour <= 20", im.FactorScale("pic/locations/shopStreet/1.jpg",1.5),
+        "hour > 20 or hour < 5", im.FactorScale("pic/locations/shopStreet/2.jpg",1.5),
+        )
     image shop = im.FactorScale('pic/locations/shop/1.jpg', 1.5)
     image shopBeauty = im.FactorScale('pic/locations/shopBeauty/1.jpg', 1.5)
-    image sex_shop = im.FactorScale('pic/locations/sex_shop/1.jpg', 1.3)
-    image hall_day = im.FactorScale('pic/locations/school/hall/1.jpg', 1.5)
-    image hall_night = im.FactorScale('pic/locations/school/hall/2.jpg', 1.5)
-    image entrance_day = im.FactorScale('pic/locations/school/entrance/1.jpg', 1.5)
-    image entrance_night = im.FactorScale('pic/locations/school/entrance/2.jpg', 1.5)
-    image library_day = im.FactorScale('pic/locations/school/library/1.jpg', 1.5)
-    image library_night = im.FactorScale('pic/locations/school/library/2.jpg', 1.5)
-    image pool_day = im.FactorScale('pic/locations/school/pool/1.jpg', 1.5)
-    image pool_night = im.FactorScale('pic/locations/school/pool/2.jpg', 1.5)
+    image sex_shop = im.FactorScale('pic/locations/sexShop/1.jpg', 1.3)
+    image hall = ConditionSwitch(
+        "hour >= 5 and hour <= 20", im.FactorScale("pic/locations/school/hall/1.jpg",1.5),
+        "hour > 20 or hour < 5", im.FactorScale("pic/locations/school/hall/2.jpg",1.5),
+        )
+    image entrance = ConditionSwitch(
+        "hour >= 5 and hour <= 20", im.FactorScale("pic/locations/school/entrance/1.jpg",1.5),
+        "hour > 20 or hour < 5", im.FactorScale("pic/locations/school/entrance/2.jpg",1.5),
+        )
+    image library = ConditionSwitch(
+        "hour >= 5 and hour <= 20", im.FactorScale("pic/locations/school/library/1.jpg",1.5),
+        "hour > 20 or hour < 5", im.FactorScale("pic/locations/school/library/2.jpg",1.5),
+        )
+    image pool = ConditionSwitch(
+        "hour >= 5 and hour <= 20", im.FactorScale("pic/locations/school/pool/1.jpg",1.5),
+        "hour > 20 or hour < 5", im.FactorScale("pic/locations/school/pool/2.jpg",1.5),
+        )
+    image gym = ConditionSwitch(
+        "hour >= 5 and hour <= 20", im.FactorScale("pic/locations/school/gym/1.jpg",1.5),
+        "hour > 20 or hour < 5", im.FactorScale("pic/locations/school/gym/2.jpg",1.5),
+        )
     image changeRoom = im.FactorScale('pic/locations/school/changeRoom/1.png', 1.5)
-    image gym_day = im.FactorScale('pic/locations/school/gym/1.jpg', 1.5)
-    image gym_night = im.FactorScale('pic/locations/school/gym/2.jpg', 1.5)
     image storage = im.FactorScale('pic/locations/school/storage/1.jpg', 1.5)
-    image movie = Movie(size=(400, 300), xalign=0.2, yalign=0.5)
-    image movie = Movie(size=(400, 300), xalign=0.8, yalign=0.5)
 
 #Для теста
 label test:
@@ -165,10 +178,7 @@ label loc_home:
 # SCHOOL
 ##############################################################
 label loc_entrance:
-    if hour >= 5 and hour <= 20:
-        show entrance_day at left
-    else:
-        show entrance_night at left
+    show entrance at left
     screen entrance:
         fixed:
             vbox xalign 0.0 yalign 1.0:
@@ -188,10 +198,7 @@ label loc_entrance:
     call screen entrance
     
     label loc_library:
-        if hour >= 5 and hour <= 20:
-            show library_day at left
-        else:
-            show libraryl_night at left
+        show library at left
         screen library:
             fixed:
                 vbox xalign 0.0 yalign 1.0:
@@ -202,10 +209,7 @@ label loc_entrance:
         return
         
     label loc_hall:
-        if hour >= 5 and hour <= 20:
-            show hall_day at left
-        else:
-            show hall_night at left
+        show hall at left
         screen hall:
             fixed:
                 vbox xalign 0.0 yalign 1.0:
@@ -217,10 +221,7 @@ label loc_entrance:
         call screen hall
 
         label loc_pool:
-            if hour >= 5 and hour <= 20:
-                show pool_day at left
-            else:
-                show pool_night at left
+            show pool at left
             screen pool:
                 fixed:
                     vbox xalign 0.0 yalign 1.0:
@@ -244,10 +245,7 @@ label loc_entrance:
             return    
             
         label loc_gym:
-            if hour >= 5 and hour <= 20:
-                show gym_day at left
-            else:
-                show gym_night at left
+            show gym at left
             screen gym:
                 fixed:
                     vbox xalign 0.0 yalign 1.0:
@@ -278,10 +276,7 @@ label loc_entrance:
 # OTHER
 ##############################################################
 label loc_street:
-    if hour >= 5 and hour <= 20:
-        show street_day at left
-    else:
-        show street_night at left
+    show street
     screen street:
         fixed:
             vbox xalign 0.0 yalign 1.0:
@@ -298,10 +293,7 @@ label loc_street:
     call screen street
     
     label loc_beach:
-        if hour >= 5 and hour <= 20:
-            show beach_day at left
-        else:
-            show beach_night at left
+        show beach at left
         screen beach:
             fixed:
                 vbox xalign 0.0 yalign 1.0:
@@ -311,10 +303,7 @@ label loc_street:
         call screen beach
         
         label loc_beachChange:
-            if hour >= 5 and hour <= 20:
-                show beachChange_day at left
-            else:
-                show beachChange_night at left
+            show beachChange at left
             screen beachChange:
                 fixed:
                     vbox xalign 0.0 yalign 1.0:
@@ -325,21 +314,18 @@ label loc_street:
     return
         
     label loc_shopStreet:
-        if hour >= 5 and hour <= 20:
-            show shopStreet_day at left
-        else:
-            show shopStreet_night at left
-            screen shopStreet:
-                fixed:
-                    vbox xalign 0.0 yalign 1.0:
-                        text 'Торговая улица! На ней много всяких маленьких магазинчиков, в которых закупается весь город. Говорят, что в некоторых странах Есть ОГРОМНЫЕ магазины, в которых есть ВСЁ. Но это как то бездушно. Зачем тебе это всё, когда души то нет?' style style.description
-                        text 'Мини маркет работает круглосуточно.' style style.description
-                        text 'Салон красоты работает с 8 до 19 ежедневно.' style style.description
-                    textbutton 'К дому' xalign 0.5 yalign 0.8 action [Function(changetime, 15),Function(move, 'loc_street')]
-                    textbutton 'Магазин' xalign 0.4 yalign 0.5 action [Function(move, 'loc_shop')]
-                    if hour >=8 and hour <= 19: 
-                        textbutton 'Салон\nКрасоты' xalign 0.2 yalign 0.55 action [Function(move, 'loc_shopBeauty')]
-                        textbutton 'Сексшоп' xalign 0.65 yalign 0.45 action [Function(move, 'loc_sex_shop')]
+        show shopStreet at left
+        screen shopStreet:
+            fixed:
+                vbox xalign 0.0 yalign 1.0:
+                    text 'Торговая улица! На ней много всяких маленьких магазинчиков, в которых закупается весь город. Говорят, что в некоторых странах Есть ОГРОМНЫЕ магазины, в которых есть ВСЁ. Но это как то бездушно. Зачем тебе это всё, когда души то нет?' style style.description
+                    text 'Мини маркет работает круглосуточно.' style style.description
+                    text 'Салон красоты работает с 8 до 19 ежедневно.' style style.description
+                textbutton 'К дому' xalign 0.5 yalign 0.8 action [Function(changetime, 15),Function(move, 'loc_street')]
+                textbutton 'Магазин' xalign 0.4 yalign 0.5 action [Function(move, 'loc_shop')]
+                if hour >=8 and hour <= 19: 
+                    textbutton 'Салон\nКрасоты' xalign 0.2 yalign 0.55 action [Function(move, 'loc_shopBeauty')]
+                    textbutton 'Сексшоп' xalign 0.65 yalign 0.45 action [Function(move, 'loc_sex_shop')]
         call screen shopStreet
         
 
@@ -373,19 +359,4 @@ label loc_street:
                 call screen sex_shop
                 return
         return
-    return
-
-
-label look_around:
-    hide screen stats_screen
-    screen grid_test:
-        frame:
-            vbox:
-                grid 2 2:
-                    text 'Кто то слева'
-                    text 'Кто то справа'
-                    text 'Кто то слева'
-                    text 'Кто то справа'
-                textbutton 'Назад' action Function(move, curloc)
-    call screen grid_test
     return

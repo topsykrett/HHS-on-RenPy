@@ -50,5 +50,12 @@ init -5 python:
         return dynpicto, None
 
 #Работа с людьми
-    def getChar():
-        return allChars[rand(0,len(allChars)-1)]
+    def getChar(*args):
+        if len(args) == 0:
+            return allChars[rand(0,len(allChars)-1)]
+        if len(args) == 1:
+            temp = []
+            for char in allChars:
+                if char.sex == args[0]:
+                    temp.append(char)
+            return temp[rand(0,len(temp)-1)]

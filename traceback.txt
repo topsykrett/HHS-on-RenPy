@@ -1,29 +1,23 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While running game code:
-  File "game/generation.rpy", line 389, in script
-    $ move("loc_home")
-  File "game/generation.rpy", line 389, in <module>
-    $ move("loc_home")
-  File "game/on_move.rpy", line 16, in move
-    getLoc(curloc).people = [] #Сброс людей с предыдущей локации
-AttributeError: 'bool' object has no attribute 'people'
+While parsing E:\Dropbox\HHS-on-RenPy/game/Interaction.rpy.
+ScriptError: Name u'look_around' is defined twice, at game/Interaction.rpy:1 and game/locations.rpy:365.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/generation.rpy", line 389, in script
-    $ move("loc_home")
-  File "E:\RenPy\renpy-6.99.1-sdk\renpy\ast.py", line 785, in execute
-    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-  File "E:\RenPy\renpy-6.99.1-sdk\renpy\python.py", line 1432, in py_exec_bytecode
-    exec bytecode in globals, locals
-  File "game/generation.rpy", line 389, in <module>
-    $ move("loc_home")
-  File "game/on_move.rpy", line 16, in move
-    getLoc(curloc).people = [] #Сброс людей с предыдущей локации
-AttributeError: 'bool' object has no attribute 'people'
+  File "E:\RenPy\renpy-6.99.1-sdk\renpy\bootstrap.py", line 287, in bootstrap
+    renpy.main.main()
+  File "E:\RenPy\renpy-6.99.1-sdk\renpy\main.py", line 269, in main
+    renpy.game.script.load_script() # sets renpy.game.script.
+  File "E:\RenPy\renpy-6.99.1-sdk\renpy\script.py", line 181, in load_script
+    self.load_appropriate_file(".rpyc", ".rpy", dir, fn, initcode)
+  File "E:\RenPy\renpy-6.99.1-sdk\renpy\script.py", line 498, in load_appropriate_file
+    self.finish_load(stmts, initcode, filename=rpyfn)
+  File "E:\RenPy\renpy-6.99.1-sdk\renpy\script.py", line 336, in finish_load
+    bad_node.filename, bad_node.linenumber))
+ScriptError: Name u'look_around' is defined twice, at game/Interaction.rpy:1 and game/locations.rpy:365.
 
 Windows-7-6.1.7601-SP1
 Ren'Py 6.99.1.329
-HHS 0.1
+ 

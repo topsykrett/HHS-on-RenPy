@@ -8,7 +8,8 @@ init -3 python:
     month = 5
     number = 1
     year = 2010
-
+    ptime = 0
+    
     def gettime():
         #Дни недели
         if weekday == 1: _weekday = 'Понедельник'
@@ -41,7 +42,7 @@ init -3 python:
         return output
         
     def changetime(change):
-        global minute, check_minute, hour, ptime, weekday, number, year, month
+        global minute, check_minute, hour, ptime, weekday, number, year, month, ptime
         minute += change
         check_minute += change
         

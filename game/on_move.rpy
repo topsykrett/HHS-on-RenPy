@@ -5,6 +5,7 @@ init:
         "hour > 8  and hour <= 18", "#FFFFFF",
         "hour > 18  and hour <= 20", "#EB9191",
         )
+    $ lastEventTime = 0
     
 init python:
 #базовая функция перемещения. Использовать всегда и всюду
@@ -28,7 +29,7 @@ init python:
 
             if where[:4] == 'loc_': #Если локация - локация
                 addPeopleLocation(where) #Добавление людей на локацию
-                if rand(0,99) < len(getLoc(where).events): tryEvent(where) # попытка дёрнуть рандомный эвент с локации. Чем больше эвентов, тем больше шанс
+                if rand(0,99) < len(getLoc(where).events) + (ptime - lastEventTime): tryEvent(where) # попытка дёрнуть рандомный эвент с локации. Чем больше эвентов, тем больше шанс
 
             renpy.retain_after_load() # чтобы сохранялся интерфейс, иначе ошибка
             renpy.fix_rollback() #запрет отката
@@ -38,22 +39,23 @@ init python:
         else:
             renpy.jump('loc_home')
             
-    def resetStats(input):
+    def resetStats(input): #Просто дёргает всех людей и сбрасывает выделющиеся статы
         for x in input:
             x.reset()
-    
-    def tryEvent(location):
+#Вызов эвента
+    def tryEvent(location): #Попытка вызвать эвент
         for x in locations:
             if x.id == location:
                 if len(x.events) > 0:
                     renpy.hide_screen('stats_screen')
                     rands = rand(0,len(x.events)-1)
                     renpy.jump(x.events[rands].id)
-
-    def addPeopleLocation(location):
-        location = getLoc(location)
+#Добавление людей на локации
+    def addPeopleLocation(location): #Добавление людей на локации
+        location = getLoc(location) #Получение объекта локации
         for x in allChars:
-            if rand(0,99) < location.getprob():
+            if rand(0,99) < location.getprob(): #В зависимости от вероятности (меняется от времени)
                 temp = getChar()
                 if location.people.count(temp) == 0:
+                    lastEventTime = ptime
                     location.people.append(temp)
