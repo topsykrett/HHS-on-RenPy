@@ -1,0 +1,41 @@
+﻿
+Ren'Py 6.99.1.329 lint report, generated at: Thu Apr 16 20:39:36 2015
+
+saves/auto-1-LT1 (Конфликтующая копия с компьютера 05_2015_PC 2015-04-16).save contains non-ASCII characters in its filename.
+(ZIP file distributions can only reliably include ASCII filenames.)
+
+saves/auto-10-LT1 (Конфликтующая копия с компьютера 05_2015_PC 2015-04-16).save contains non-ASCII characters in its filename.
+
+saves/auto-2-LT1 (Конфликтующая копия с компьютера 05_2015_PC 2015-04-16).save contains non-ASCII characters in its filename.
+
+saves/auto-3-LT1 (Конфликтующая копия с компьютера 05_2015_PC 2015-04-16).save contains non-ASCII characters in its filename.
+
+saves/auto-4-LT1 (Конфликтующая копия с компьютера 05_2015_PC 2015-04-16).save contains non-ASCII characters in its filename.
+
+saves/auto-5-LT1 (Конфликтующая копия с компьютера 05_2015_PC 2015-04-16).save contains non-ASCII characters in its filename.
+
+saves/auto-6-LT1 (Конфликтующая копия с компьютера 05_2015_PC 2015-04-16).save contains non-ASCII characters in its filename.
+
+saves/auto-7-LT1 (Конфликтующая копия с компьютера 05_2015_PC 2015-04-16).save contains non-ASCII characters in its filename.
+
+saves/auto-8-LT1 (Конфликтующая копия с компьютера 05_2015_PC 2015-04-16).save contains non-ASCII characters in its filename.
+
+saves/auto-9-LT1 (Конфликтующая копия с компьютера 05_2015_PC 2015-04-16).save contains non-ASCII characters in its filename.
+
+saves/persistent (Конфликтующая копия с компьютера 05_2015_PC 2015-04-16) contains non-ASCII characters in its filename.
+
+saves/_reload-2-LT1 (Конфликтующая копия с компьютера 05_2015_PC 2015-04-16).save contains non-ASCII characters in its filename.
+
+
+Statistics:
+
+The game contains 3 dialogue blocks, containing 14 words and 103 characters,
+for an average of 4.7 words and 34 characters per block.
+
+The game contains 1 menus, 4 images, and 15 screens.
+
+
+Remember to set config.developer to False before releasing.
+
+Lint is not a substitute for thorough testing. Remember to update Ren'Py
+before releasing. New releases fix bugs and improve compatibility.
