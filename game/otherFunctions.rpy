@@ -48,3 +48,7 @@ init -5 python:
 #Динамическая картинка
     def dynImage(st,at):
         return dynpicto, None
+
+#Работа с людьми
+    def getChar():
+        return allChars[rand(0,len(allChars)-1)]

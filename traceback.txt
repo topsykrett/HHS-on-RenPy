@@ -1,30 +1,28 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/generation.rpy", line 216, in script
-    python:
-  File "game/generation.rpy", line 318, in <module>
-    _picto = picto_f[rand(0,len(picto_f) - 1 )]
-  File "game/otherFunctions.rpy", line 4, in rand
-    return random.randint(a,b)
-ValueError: empty range for randrange() (0,0, 0)
+  File "game/generation.rpy", line 389, in script
+    $ move("loc_home")
+  File "game/generation.rpy", line 389, in <module>
+    $ move("loc_home")
+  File "game/on_move.rpy", line 16, in move
+    getLoc(curloc).people = [] #Сброс людей с предыдущей локации
+AttributeError: 'bool' object has no attribute 'people'
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/generation.rpy", line 216, in script
-    python:
+  File "game/generation.rpy", line 389, in script
+    $ move("loc_home")
   File "E:\RenPy\renpy-6.99.1-sdk\renpy\ast.py", line 785, in execute
     renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
   File "E:\RenPy\renpy-6.99.1-sdk\renpy\python.py", line 1432, in py_exec_bytecode
     exec bytecode in globals, locals
-  File "game/generation.rpy", line 318, in <module>
-    _picto = picto_f[rand(0,len(picto_f) - 1 )]
-  File "game/otherFunctions.rpy", line 4, in rand
-    return random.randint(a,b)
-  File "/home/tom/ab/x64lucid-deps/install/lib/python2.7/random.py", line 242, in randint
-  File "/home/tom/ab/x64lucid-deps/install/lib/python2.7/random.py", line 218, in randrange
-ValueError: empty range for randrange() (0,0, 0)
+  File "game/generation.rpy", line 389, in <module>
+    $ move("loc_home")
+  File "game/on_move.rpy", line 16, in move
+    getLoc(curloc).people = [] #Сброс людей с предыдущей локации
+AttributeError: 'bool' object has no attribute 'people'
 
 Windows-7-6.1.7601-SP1
 Ren'Py 6.99.1.329

@@ -8,6 +8,7 @@ init 10 python:
             self.base_prob = base_prob
             self.events = []
             self.position = position
+            self.people = []
             
         def getprob(self):
             if lt() > 0 or lt() == -4:

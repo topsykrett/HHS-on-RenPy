@@ -13,6 +13,7 @@ init python:
         if renpy.has_label(where) == True: #Проверка на то, что локация существует. Если нет, прыгаем домой.
             renpy.scene() #Сброс окна
             renpy.show('daytime')
+            if getLoc(curloc) != False: getLoc(curloc).people = [] #Сброс людей с предыдущей локации
             
             if where != curloc:
                 prevloc = curloc
@@ -20,19 +21,20 @@ init python:
             else:
                 same_loc = 1
             
+            player.energy -= randf(2,5) #расход энергии
+            resetStats(allChars) #Сброс статов
+            curloc = where #Добавление курлока
+            changetime(rand(2, 5)) #изменение времени
+
+            if where[:4] == 'loc_': #Если локация - локация
+                addPeopleLocation(where) #Добавление людей на локацию
+                if rand(0,99) < len(getLoc(where).events): tryEvent(where) # попытка дёрнуть рандомный эвент с локации. Чем больше эвентов, тем больше шанс
+
             renpy.retain_after_load() # чтобы сохранялся интерфейс, иначе ошибка
             renpy.fix_rollback() #запрет отката
             renpy.show_screen('stats_screen') #При перемещении всегда появляется интерфейс
             
-            player.energy -= randf(2,5)
-            resetStats(allChars)
-            curloc = where
-            changetime(rand(2, 5))
-            
-            if where[:4] == 'loc_':
-                if rand(1,100) < getLoc(where).getprob(): tryEvent(where) # попытка дёрнуть рандомный эвент с локации
-
-            renpy.jump(where)
+            renpy.jump(where) #Переход на локу
         else:
             renpy.jump('loc_home')
             
@@ -47,4 +49,11 @@ init python:
                     renpy.hide_screen('stats_screen')
                     rands = rand(0,len(x.events)-1)
                     renpy.jump(x.events[rands].id)
-        
+
+    def addPeopleLocation(location):
+        location = getLoc(location)
+        for x in allChars:
+            if rand(0,99) < location.getprob():
+                temp = getChar()
+                if location.people.count(temp) == 0:
+                    location.people.append(temp)
