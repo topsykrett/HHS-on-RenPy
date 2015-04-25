@@ -49,7 +49,3 @@ log.txt
 *.rpyb
 *.rpyc
 *.txt
-*.rpyb
-game/saves/persistent
-*.txt
-*.rpyb

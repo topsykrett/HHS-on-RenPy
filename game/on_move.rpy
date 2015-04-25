@@ -39,12 +39,10 @@ init python:
             renpy.jump(where) #Переход на локу
         else:
             renpy.jump('loc_home')
-
+            
     def resetStats(input): #Просто дёргает всех людей и сбрасывает выделющиеся статы
         for x in input:
             x.reset()
-        player.reset()
-            
 #Вызов эвента
     def tryEvent(location):
         for x in locations:
@@ -52,9 +50,7 @@ init python:
                 if len(x.events) > 0:
                     renpy.hide_screen('stats_screen')
                     rands = rand(0,len(x.events)-1)
-                    callEvent = x.events[rands].id
-                    x.events.remove(x.events[rands])
-                    renpy.jump(callEvent)
+                    renpy.jump(x.events[rands].id)
                     
 #Добавление людей на локации
     def addPeopleLocation(location):
