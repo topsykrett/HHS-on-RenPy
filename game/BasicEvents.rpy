@@ -173,3 +173,32 @@ label cleanAss:
         'Это может и подождать! Да! Наверное...':
             pass
     $ move(curloc)
+
+label sleep:
+    hide screen stats_screen
+    python:
+        global hour, ptime, last_sleeped
+        hour_up = 7
+        if hour >= 0:
+            start_hour = hour - 24
+        else:
+            start_hour = hour
+        sleeped = 0
+        while player.energy < player.health and start_hour < hour_up and sleeped < 12:
+            changetime(60)
+            start_hour += 1
+            player.energy += rand(100,125)
+            sleeped += 1
+        player.reset()
+        last_sleeped = ptime
+        if rand(1,3) > 2:
+            tryEvent('loc_dreams')
+        renpy.jump('loc_dreams')
+        
+label loc_dreams:
+    hide screen show_stats
+    $ rands = rand(1,11)
+    show expression ("pic/locations/home/dream/no%d.jpg" % rands) at top
+    'В это раз Вам ничего не снилось и, провалившись в ласковые объятия сна, Вы отлично выспались.'
+    $ move('loc_bedroom')
+    

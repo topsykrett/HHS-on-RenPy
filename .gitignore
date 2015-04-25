@@ -49,3 +49,5 @@ log.txt
 *.rpyb
 *.rpyc
 *.txt
+*.txt
+game/saves/persistent

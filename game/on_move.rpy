@@ -15,46 +15,51 @@ init python:
             renpy.scene() #Сброс окна
             renpy.show('daytime')
             if getLoc(curloc) != False: getLoc(curloc).people = [] #Сброс людей с предыдущей локации
-            
-            if where != curloc:
-                prevloc = curloc
-                same_loc = 0
-            else:
-                same_loc = 1
-            
+
             player.energy -= randf(2,5) #расход энергии
             resetStats(allChars) #Сброс статов
             curloc = where #Добавление курлока
             changetime(rand(2, 5)) #изменение времени
 
-            if where[:4] == 'loc_': #Если локация - локация
+            if where[:4] == 'loc_' and getLoc(where).position != 'tech': #Если локация - локация и если она не техническая
                 addPeopleLocation(where) #Добавление людей на локацию
-                if rand(0,99) < len(getLoc(where).events) + (ptime - lastEventTime): tryEvent(where) # попытка дёрнуть рандомный эвент с локации. Чем больше эвентов, тем больше шанс
-
+                if rand(0,99) < 10 + (ptime - lastEventTime)*10: tryEvent(where) # попытка дёрнуть рандомный эвент с локации. Чем больше эвентов, тем больше шанс
+                
+                if where != curloc:
+                    prevloc = curloc
+                    same_loc = 0
+                else:
+                    same_loc = 1
+                    
             renpy.retain_after_load() # чтобы сохранялся интерфейс, иначе ошибка
-            renpy.fix_rollback() #запрет отката
             
             renpy.show_screen('stats_screen') #При перемещении всегда появляется интерфейс
             
             renpy.jump(where) #Переход на локу
         else:
             renpy.jump('loc_home')
-
-    def resetStats(input): #Просто дёргает всех людей и сбрасывает выделющиеся статы
+            
+#Просто дёргает всех людей и сбрасывает выделющиеся статы
+    def resetStats(input): 
         for x in input:
             x.reset()
         player.reset()
+
             
 #Вызов эвента
     def tryEvent(location):
-        for x in locations:
+        tempEv = []
+        for x in locations: #перебираем локи и ищем подходящие эвенты
             if x.id == location:
-                if len(x.events) > 0:
-                    renpy.hide_screen('stats_screen')
-                    rands = rand(0,len(x.events)-1)
-                    callEvent = x.events[rands].id
-                    x.events.remove(x.events[rands])
-                    renpy.jump(callEvent)
+                for event in x.events:
+                    if event.corr <= getPar(studs, 'corr'):
+                        tempEv.append(event)
+        if len(tempEv) > 0:
+            renpy.hide_screen('stats_screen')
+            rands = rand(0,len(tempEv)-1)
+            callEvent = tempEv[rands].id
+            lastEventTime = ptime #запоминаем время
+            renpy.jump(callEvent) #эвент
                     
 #Добавление людей на локации
     def addPeopleLocation(location):
@@ -63,5 +68,4 @@ init python:
             if rand(0,99) < location.getprob(): #В зависимости от вероятности (меняется от времени)
                 temp = getChar()
                 if location.people.count(temp) == 0:
-                    lastEventTime = ptime
                     location.people.append(temp)

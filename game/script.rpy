@@ -13,7 +13,7 @@ label start:
     python:
         for x in locations:
             if x.name == 'UNKNOWN':
-                renpy.say('WRONG LOCATION! ADD TO LOCATIONS LIST!')
+                renpy.say('','WRONG LOCATION! ADD TO LOCATIONS LIST!')
     menu:
         'selchar':
             jump gendir

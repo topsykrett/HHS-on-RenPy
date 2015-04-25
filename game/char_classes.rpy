@@ -163,7 +163,11 @@ init -20 python:
             self.beauty = min(max(self.beauty,0),200)
             self.dirty = min(max(self.dirty,0),30)
             self.rep = min(max(self.rep,0),100)
+        
+        def setCorr(self,amount):
+            self.corr += amount
 
+            
 #Класс частей тела
     class BodyPart():
         def __init__(self, name, visibility, sperm):

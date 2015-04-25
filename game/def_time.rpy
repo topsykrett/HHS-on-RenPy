@@ -9,6 +9,7 @@ init -3 python:
     number = 1
     year = 2010
     ptime = 0
+    last_sleeped = 0
     
     def gettime():
         #Дни недели
@@ -50,6 +51,7 @@ init -3 python:
             minute -= 60
             hour += 1
             ptime += 1
+            if hour == 0: dailyRecount()
             if hour >= 24:
                 hour -= 24
                 weekday += 1

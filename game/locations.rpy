@@ -34,7 +34,7 @@ init 10 python:
                     if eventLabel.find(location.id) > 0: #Если имя локации содержится в имени эвента
                         index = eventLabel.rfind(location.id) #находим правый индекс имени локации
                         corr = eventLabel[index:] #режем по нему
-                        temp = corr.split("_") #разбиваем строку по _
+                        temp = corr.split("_") #разбиваем строку по_
                         corr = int(temp[2]) #находим развратность
                         event = Event(id = eventLabel, corr = corr) # создаём эвент
                         location.events.append(event) #добавляем его в массив эвентов локации
@@ -42,6 +42,7 @@ init 10 python:
     
 #Создание массива всех локаций
     _locs = renpy.get_all_labels()
+    
     for x in _locs:
         if x[:4] == 'loc_':
             if x == 'loc_home': loc = Location(id = x, name = 'дом', base_prob = 100, position = 'home')
@@ -64,7 +65,10 @@ init 10 python:
             elif x == 'loc_gym': loc = Location(id = x, name = 'спортивный зал', base_prob = 25, position = 'school')
             elif x == 'loc_pool': loc = Location(id = x, name = 'бассейн', base_prob = 15, position = 'school')
             elif x == 'loc_storage': loc = Location(id = x, name = 'кладовка', base_prob = 5, position = 'school')
-            else: loc = Location(id = x, name = 'UNKNOWN', base_prob = 10, position = 'other')
+            
+            elif x == 'loc_dreams': loc = Location(id = x, name = 'Сны', base_prob = 0, position = 'tech')
+            
+            else: loc = Location(id = x, name = 'UNKNOWN', base_prob = 0, position = 'other')
             locations.append(loc)
             
     getEvents() #добавляю всем эвенты
@@ -149,6 +153,8 @@ label loc_home:
             fixed:
                 text 'Уютненькая маленькая спальня. Слева находится небольшой шкаф, в котором висит ваша повседневная одежда. Справа кровать, довольно удобная. Тут ещё есть телевизор, но он не работает, так что совсем не будет мешать Вам отходить ко сну.' xalign 0.0 yalign 1.0 style style.description
                 textbutton 'Гостинная' xalign 0.5 yalign 0.8 action Function(move, 'loc_home')
+                if (ptime - last_sleeped >= 4) or (player.energy < player.health/4):
+                    textbutton 'Спать' xalign 0.85 yalign 0.7 action Jump('sleep')
         call screen bedroom
         return
         

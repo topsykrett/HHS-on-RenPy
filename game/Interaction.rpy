@@ -43,7 +43,14 @@ screen show_stat():
     tag interface
     fixed xpos 0.1 ypos 0.1:
         vbox:
-            text '1 [interactionObj.name]' style style.my_text
-            text '2 [interactionObj.age]' style style.my_text
+            $ x = interactionObj
+            text '[x.name]' style style.my_text
+            if x.bsize > 0: 
+                text 'Размер груди [x.bsize]' style style.my_text
+            text 'Рост [x.height]' style style.my_text
+            text 'Образование [x.edu]' style style.my_text
+            text 'Счастье [x.fun]' style style.my_text
+            text 'Лояльность [x.loy]' style style.my_text
+            text 'Развратность [x.corr]' style style.my_text
+            text 'Красота [x.beauty]' style style.my_text
             textbutton 'Назад' action Show(lastView)
-            
