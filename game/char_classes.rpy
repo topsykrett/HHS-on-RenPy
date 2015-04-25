@@ -170,4 +170,3 @@ init -20 python:
             self.name = name
             self.visibility = visibility
             self.sperm = sperm
-        

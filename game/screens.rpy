@@ -651,7 +651,7 @@ screen stats_screen:
                 text ' [temp]' style style.my_text
     
     vbox xalign 0.99 yalign 0.0:
-        imagebutton auto "pic/actions/eye_%s.png" action Jump('look_around')
+        imagebutton auto "pic/actions/eye_%s.png" action [Hide('stats_screen'),Jump('locationPeople')]
         imagebutton auto "pic/actions/wait15_%s.png" action [Function(waiting,15)]
         imagebutton auto "pic/actions/wait60_%s.png" action [Function(waiting,60)]
 

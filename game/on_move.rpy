@@ -33,6 +33,7 @@ init python:
 
             renpy.retain_after_load() # чтобы сохранялся интерфейс, иначе ошибка
             renpy.fix_rollback() #запрет отката
+            
             renpy.show_screen('stats_screen') #При перемещении всегда появляется интерфейс
             
             renpy.jump(where) #Переход на локу
@@ -43,15 +44,16 @@ init python:
         for x in input:
             x.reset()
 #Вызов эвента
-    def tryEvent(location): #Попытка вызвать эвент
+    def tryEvent(location):
         for x in locations:
             if x.id == location:
                 if len(x.events) > 0:
                     renpy.hide_screen('stats_screen')
                     rands = rand(0,len(x.events)-1)
                     renpy.jump(x.events[rands].id)
+                    
 #Добавление людей на локации
-    def addPeopleLocation(location): #Добавление людей на локации
+    def addPeopleLocation(location):
         location = getLoc(location) #Получение объекта локации
         for x in allChars:
             if rand(0,99) < location.getprob(): #В зависимости от вероятности (меняется от времени)

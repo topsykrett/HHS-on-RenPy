@@ -1,4 +1,4 @@
-Sat Apr 25 02:01:40 2015
+Sat Apr 25 21:11:21 2015
 Windows-7-6.1.7601-SP1
 Ren'Py 6.99.1.329
 HHS 0.1
@@ -328,7 +328,7 @@ Extensions:
     GL_SUN_slice_accum
     GL_WIN_swap_hint
     WGL_EXT_swap_control
-Number of textus: 4
+Number of texture units: 4
 Using shader environment.
 Using copy RTT.
 Using gl renderer.
@@ -340,4 +340,3 @@ Texture testing:
 - 512px textures work.
 - 1024px textures work.
 - 2048px textures work.
-work.

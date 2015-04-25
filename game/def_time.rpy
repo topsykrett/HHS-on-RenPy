@@ -2,7 +2,7 @@ init -3 python:
     #Start time
     minute = 0
     check_minute = 0
-    hour = 0
+    hour = 6
     ptime = 0
     weekday = 1
     month = 5
