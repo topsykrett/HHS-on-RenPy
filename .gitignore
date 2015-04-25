@@ -46,3 +46,6 @@ errors.txt
 game/saves/persistent
 log.txt
 *.rpyc
+*.rpyb
+*.rpyc
+*.txt
