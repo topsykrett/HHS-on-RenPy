@@ -1,42 +1,25 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-After initialization, but before game start.
-  File "game/locations.rpy", line 152, in prepare
-    screen bedroom:
-  File "game/locations.rpy", line 152, in analyze
-    screen bedroom:
-  File "game/locations.rpy", line 153, in analyze
-    fixed:
-  File "game/locations.rpy", line 153, in analyze
-    fixed:
-  File "game/locations.rpy", line 156, in analyze
-    if (ptime - last_sleeped => 4) or (player.energy < player.health/4):
-SyntaxError: invalid syntax (game/locations.rpy, line 156)
+While running game code:
+  File "game/locations.rpy", line 188, in script call
+    call screen home
+  File "renpy/common/00console.rpy", line 604, in script call
+    python in _console:
+ScriptError: could not find label 'office'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "E:\RenPy\renpy-6.99.1-sdk\renpy\bootstrap.py", line 287, in bootstrap
-    renpy.main.main()
-  File "E:\RenPy\renpy-6.99.1-sdk\renpy\main.py", line 331, in main
-    renpy.display.screen.prepare_screens()
-  File "E:\RenPy\renpy-6.99.1-sdk\renpy\display\screen.py", line 678, in prepare_screens
-    s.ast.prepare()
-  File "game/locations.rpy", line 152, in prepare
-    screen bedroom:
-  File "game/locations.rpy", line 152, in analyze
-    screen bedroom:
-  File "game/locations.rpy", line 153, in analyze
-    fixed:
-  File "game/locations.rpy", line 153, in analyze
-    fixed:
-  File "game/locations.rpy", line 156, in analyze
-    if (ptime - last_sleeped => 4) or (player.energy < player.health/4):
-  File "E:\RenPy\renpy-6.99.1-sdk\renpy\pyanalysis.py", line 439, in is_constant_expr
-    node = py_compile(expr, 'eval', ast_node=True)
-  File "E:\RenPy\renpy-6.99.1-sdk\renpy\python.py", line 512, in py_compile
-    raise e
-SyntaxError: invalid syntax (game/locations.rpy, line 156)
+  File "game/locations.rpy", line 188, in script call
+    call screen home
+  File "renpy/common/00console.rpy", line 604, in script call
+    python in _console:
+  File "<string>", line 1, in script
+  File "E:\RenPy\renpy-6.99.1-sdk\renpy\ast.py", line 1480, in execute
+    rv = renpy.game.script.lookup(target)
+  File "E:\RenPy\renpy-6.99.1-sdk\renpy\script.py", line 602, in lookup
+    raise ScriptError("could not find label '%s'." % str(original))
+ScriptError: could not find label 'office'.
 
 Windows-7-6.1.7601-SP1
 Ren'Py 6.99.1.329
