@@ -624,6 +624,7 @@ screen stats_screen:
                 $temp = getPar(studs, 'lust')
                 text 'Желание' style style.my_text
                 text ' [temp]' style style.my_text
+                
                 $ temp = getPar(studs, 'corr')
                 text 'Разврат' style style.my_text
                 text ' [temp]' style style.my_text

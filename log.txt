@@ -1,11 +1,11 @@
-Sun Apr 26 16:47:56 2015
+Sun Apr 26 17:21:58 2015
 Windows-7-6.1.7601-SP1
 Ren'Py 6.99.1.329
 HHS 0.1
 
 
 Windowed mode.
-Screen sizes: virtual=(1200, 768) physical=(1525, 976)
+Screen sizes: virtual=(1200, 768) physical=(1353, 866)
 Vendor: 'NVIDIA Corporation'
 Renderer: 'GeForce GTX 760/PCIe/SSE2'
 Version: '4.5.0 NVIDIA 350.12'
@@ -340,12 +340,3 @@ Texture testing:
 - 512px textures work.
 - 1024px textures work.
 - 2048px textures work.
-
-Windowed mode.
-Screen sizes: virtual=(1200, 768) physical=(1013, 661)
-
-Windowed mode.
-Screen sizes: virtual=(1200, 768) physical=(1409, 864)
-
-Windowed mode.
-Screen sizes: virtual=(1200, 768) physical=(1370, 866)
