@@ -1,30 +1,42 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While running game code:
-  File "game/generation.rpy", line 216, in script
-    python:
-  File "game/generation.rpy", line 318, in <module>
-    _picto = picto_f[rand(0,len(picto_f) - 1 )]
-  File "game/otherFunctions.rpy", line 4, in rand
-    return random.randint(a,b)
-ValueError: empty range for randrange() (0,0, 0)
+After initialization, but before game start.
+  File "game/locations.rpy", line 152, in prepare
+    screen bedroom:
+  File "game/locations.rpy", line 152, in analyze
+    screen bedroom:
+  File "game/locations.rpy", line 153, in analyze
+    fixed:
+  File "game/locations.rpy", line 153, in analyze
+    fixed:
+  File "game/locations.rpy", line 156, in analyze
+    if (ptime - last_sleeped => 4) or (player.energy < player.health/4):
+SyntaxError: invalid syntax (game/locations.rpy, line 156)
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/generation.rpy", line 216, in script
-    python:
-  File "E:\RenPy\renpy-6.99.1-sdk\renpy\ast.py", line 785, in execute
-    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-  File "E:\RenPy\renpy-6.99.1-sdk\renpy\python.py", line 1432, in py_exec_bytecode
-    exec bytecode in globals, locals
-  File "game/generation.rpy", line 318, in <module>
-    _picto = picto_f[rand(0,len(picto_f) - 1 )]
-  File "game/otherFunctions.rpy", line 4, in rand
-    return random.randint(a,b)
-  File "/home/tom/ab/x64lucid-deps/install/lib/python2.7/random.py", line 242, in randint
-  File "/home/tom/ab/x64lucid-deps/install/lib/python2.7/random.py", line 218, in randrange
-ValueError: empty range for randrange() (0,0, 0)
+  File "E:\RenPy\renpy-6.99.1-sdk\renpy\bootstrap.py", line 287, in bootstrap
+    renpy.main.main()
+  File "E:\RenPy\renpy-6.99.1-sdk\renpy\main.py", line 331, in main
+    renpy.display.screen.prepare_screens()
+  File "E:\RenPy\renpy-6.99.1-sdk\renpy\display\screen.py", line 678, in prepare_screens
+    s.ast.prepare()
+  File "game/locations.rpy", line 152, in prepare
+    screen bedroom:
+  File "game/locations.rpy", line 152, in analyze
+    screen bedroom:
+  File "game/locations.rpy", line 153, in analyze
+    fixed:
+  File "game/locations.rpy", line 153, in analyze
+    fixed:
+  File "game/locations.rpy", line 156, in analyze
+    if (ptime - last_sleeped => 4) or (player.energy < player.health/4):
+  File "E:\RenPy\renpy-6.99.1-sdk\renpy\pyanalysis.py", line 439, in is_constant_expr
+    node = py_compile(expr, 'eval', ast_node=True)
+  File "E:\RenPy\renpy-6.99.1-sdk\renpy\python.py", line 512, in py_compile
+    raise e
+SyntaxError: invalid syntax (game/locations.rpy, line 156)
 
 Windows-7-6.1.7601-SP1
 Ren'Py 6.99.1.329

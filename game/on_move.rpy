@@ -52,8 +52,12 @@ init python:
         for x in locations: #перебираем локи и ищем подходящие эвенты
             if x.id == location:
                 for event in x.events:
-                    if event.corr <= getPar(studs, 'corr'):
-                        tempEv.append(event)
+                    if x.position != 'tech':
+                        if event.corr <= getPar(studs, 'corr'):
+                            tempEv.append(event)
+                    else :
+                        if event.corr <= player.corr:
+                            tempEv.append(event)
         if len(tempEv) > 0:
             renpy.hide_screen('stats_screen')
             rands = rand(0,len(tempEv)-1)

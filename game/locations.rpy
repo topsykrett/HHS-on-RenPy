@@ -117,7 +117,8 @@ init:
         )
     image changeRoom = im.FactorScale('pic/locations/school/changeRoom/1.png', 1.5)
     image storage = im.FactorScale('pic/locations/school/storage/1.jpg', 1.5)
-
+    
+    
 #Для теста
 label test:
     python:
@@ -133,7 +134,7 @@ label test:
     
 
 ##############################################################
-#       Home
+# Home
 ##############################################################
 label loc_home:
     show expression im.FactorScale('pic/locations/home/1.jpg', 1.5) at left as home

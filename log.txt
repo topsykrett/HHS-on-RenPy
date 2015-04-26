@@ -1,11 +1,11 @@
-Sat Apr 25 21:11:21 2015
+Sun Apr 26 11:29:14 2015
 Windows-7-6.1.7601-SP1
 Ren'Py 6.99.1.329
 HHS 0.1
 
 
 Windowed mode.
-Screen sizes: virtual=(1200, 768) physical=(1200, 768)
+Screen sizes: virtual=(1200, 768) physical=(1528, 977)
 Vendor: 'NVIDIA Corporation'
 Renderer: 'GeForce GTX 760/PCIe/SSE2'
 Version: '4.5.0 NVIDIA 350.12'
