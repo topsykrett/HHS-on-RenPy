@@ -14,7 +14,7 @@ init -1 python hide:
     ## пользователь не смог мошенничать, используя эти инструменты.
 
     config.developer = True
-    config.hard_rollback_limit = 3
+    config.hard_rollback_limit = 0
     
     ## Эти управляют шириной и высотой экрана.
 

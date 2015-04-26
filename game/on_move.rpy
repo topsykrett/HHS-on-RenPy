@@ -18,19 +18,19 @@ init python:
 
             player.energy -= randf(2,5) #расход энергии
             resetStats(allChars) #Сброс статов
-            curloc = where #Добавление курлока
+
             changetime(rand(2, 5)) #изменение времени
 
             if where[:4] == 'loc_' and getLoc(where).position != 'tech': #Если локация - локация и если она не техническая
                 addPeopleLocation(where) #Добавление людей на локацию
                 if rand(0,99) < 10 + (ptime - lastEventTime)*10: tryEvent(where) # попытка дёрнуть рандомный эвент с локации. Чем больше эвентов, тем больше шанс
-                
                 if where != curloc:
                     prevloc = curloc
+                    curloc = where
                     same_loc = 0
                 else:
                     same_loc = 1
-                    
+                
             renpy.retain_after_load() # чтобы сохранялся интерфейс, иначе ошибка
             
             renpy.show_screen('stats_screen') #При перемещении всегда появляется интерфейс

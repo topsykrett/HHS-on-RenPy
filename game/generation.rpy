@@ -58,7 +58,7 @@ init -1 python:
     _intel = 50
     _money = 5000
     _bsize = 2
-    _picture = 'pic/events/students/picto/female/1.jpg'
+    _picture = "pic/Hero/2.png"
     history = 0
     answer = [0,0,0,0,0]
 
@@ -75,7 +75,7 @@ label gendir:
             jump gendir
         "Выбрать историю" if _fname != '' and _lname != '':
             jump history
-        "Закончить":# if answer == [1,1,1,1,1] and _fname != '' and _lname != '':
+        "Закончить" if answer == [1,1,1,1,1]:
             jump skipall
             
 label history:
@@ -201,9 +201,7 @@ label history:
             
 label selchar:
     show white
-    if _picture == 0:
-        call screen char_select
-    "dummy"
+    call screen char_select
 
 label skipall:
     python:

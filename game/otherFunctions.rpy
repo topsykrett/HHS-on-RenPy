@@ -1,8 +1,14 @@
 init -5 python:
     import random
     import time
+    
+    dublicationChar = []
+    
     def rand(a, b):
-        return random.randint(a,b)
+        if a == b:
+            return a
+        else:
+            return random.randint(a,b)
         
     def randf(a, b):
         return random.uniform(a,b)
@@ -52,6 +58,7 @@ init -5 python:
 
 #Работа с людьми
     def getChar(*args):
+        global dublicationChar
         if len(args) == 0:
             return allChars[rand(0,len(allChars)-1)]
             
@@ -59,18 +66,23 @@ init -5 python:
             temp = []
             if len(getLoc(curloc).people) > 0:
                 for char in getLoc(curloc).people:
-                    if char.sex == args[0]:
+                    if char.sex == args[0] and teachers.count(char) == 0 and dublicationChar.count(char) == 0:
                         temp.append(char)
                 if len(temp) > 0:
-                    if len(temp) == 1:
-                        return temp[0]
-                    else:
-                        return temp[rand(0,len(temp)-1)]
+                    rands = rand(0,len(temp)-1)
+                    dublicationChar.append(temp[rands])
+                    if len(dublicationChar) > 10:
+                        dublicationChar = []
+                    return temp[rands]
 
-            for char in allChars:
-                if char.sex == args[0]:
+            for char in studs:
+                if char.sex == args[0] and dublicationChar.count(char) == 0:
                     temp.append(char)
-            return temp[rand(0,len(temp)-1)]
+            rands = rand(0,len(temp)-1)
+            dublicationChar.append(temp[rands])
+            if len(dublicationChar) > 10:
+                dublicationChar = []
+            return temp[rands]
             
             
     def skipEvent():

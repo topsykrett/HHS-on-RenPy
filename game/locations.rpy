@@ -181,9 +181,16 @@ label test:
         player.addItems('Салфетка','Салфетка','Салфетка')
     show daytime
     hide screen stats_screen
+    player.say 'тест'
     screen empty:
-        frame xalign 0.5 yalign 0.85:
-            textbutton 'Назад' action Function(move, 'loc_home')
+        fixed:
+            vbox:
+                for x in range (0,10):
+                    $ temp = getChar('male')
+                    text temp.name
+                    $ temp = getChar('female')
+                    text temp.name
+                textbutton 'Назад' action Function(move, 'loc_home')
     call screen empty
     
 
@@ -438,7 +445,7 @@ label loc_entrance:
                         text 'Женский туалет. Очень миленький. Справа есть умывальник. С зеркалом.' style style.description
                     textbutton 'Первый этаж' xalign 0.2 yalign 0.8 action Function(move, 'loc_secondFloor') style "navigation_button" text_style "navigation_button_text"
             call screen wcf
-            
+
 ##############################################################
 # OTHER
 ##############################################################
@@ -524,6 +531,3 @@ label loc_street:
                             text 'Вы видите перед собой магазин для взрослых. Полки уставлены различными игрушками для взрослых. Дилдо, вибраторы, резиновые дырки для мальчиков, пони с уникальным седлом для девочек. Отдельная полка для афродизиаков и прочей медицины. Глаза прямо разбегаются от обилия выбора!' style style.description
                         textbutton 'Назад' xalign 0.5 yalign 0.8 action [Function(move, 'loc_shopStreet')] style "navigation_button" text_style "navigation_button_text"
                 call screen sexShop
-                
-        
-    

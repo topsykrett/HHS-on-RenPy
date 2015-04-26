@@ -565,6 +565,7 @@ init -2 python:
 #
 
 screen stats_screen:
+    tag interface
     fixed xpos 0.01 ypos 0.01:
         vbox xmaximum config.screen_width/2:
             $ currtime = gettime()
@@ -652,17 +653,19 @@ screen stats_screen:
                 text ' [temp]' style style.my_text
     
     vbox xalign 0.99 yalign 0.01:
+        imagebutton idle im.FactorScale('pic/actions/smartphone_idle.png', 0.5) hover im.FactorScale('pic/actions/smartphone.png', 0.5) action [Hide('stats_screen'), Jump('notebook')]
         imagebutton auto "pic/actions/wait15_%s.png" action [Function(waiting,15)]
         imagebutton auto "pic/actions/wait60_%s.png" action [Function(waiting,60)]
-        if len(getLoc(curloc).people) > 0:
-            imagebutton auto "pic/actions/eye_%s.png" action [Hide('stats_screen'),Jump('locationPeople')]
+        if getLoc(curloc) != False:
+            if len(getLoc(curloc).people) > 0:
+                imagebutton auto "pic/actions/eye_%s.png" action [Hide('stats_screen'),Jump('locationPeople')]
 
 
 screen char_select:
-    vbox xalign 0.5 yalign 0.5:
+    fixed:
         text 'Выберите персонаж' xalign 0.5 yalign 0.1 style style.description
-        hbox:
-            imagebutton auto "pic/Hero/1_%s.jpg" action [SetVariable('_picture',1), Jump('gendir')]
-            imagebutton auto "pic/Hero/2_%s.jpg" action [SetVariable('_picture',2), Jump('gendir')]
-            imagebutton auto "pic/Hero/3_%s.jpg" action [SetVariable('_picture',3), Jump('gendir')]
-            imagebutton auto "pic/Hero/4_%s.jpg" action [SetVariable('_picture',4), Jump('gendir')]
+        imagebutton idle "pic/Hero/1.png" hover im.FactorScale("pic/Hero/1.png",1.1) xalign 0.2 yalign 0.5 action [SetVariable('_picture',"pic/Hero/1.png"), Jump('gendir')]
+        imagebutton idle "pic/Hero/2.png" hover im.FactorScale("pic/Hero/2.png",1.1) xalign 0.4 yalign 0.5 action [SetVariable('_picture',"pic/Hero/2.png"), Jump('gendir')]
+        imagebutton idle "pic/Hero/3.png" hover im.FactorScale("pic/Hero/3.png",1.1) xalign 0.6 yalign 0.5 action [SetVariable('_picture',"pic/Hero/3.png"), Jump('gendir')]
+        imagebutton idle "pic/Hero/4.png" hover im.FactorScale("pic/Hero/4.png",1.1) xalign 0.8 yalign 0.5 action [SetVariable('_picture',"pic/Hero/4.png"), Jump('gendir')]
+            

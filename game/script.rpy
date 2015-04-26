@@ -16,7 +16,7 @@ label start:
                 renpy.say('','WRONG LOCATION! ADD TO LOCATIONS LIST! LABEL = [x.id]')
     menu:
         'selchar':
-            jump gendir
+            jump selchar
         'skipall':
             jump skipall
     return
