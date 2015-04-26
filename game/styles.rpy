@@ -1,8 +1,16 @@
 init python:
-     style.my_text = Style(style.default)
-     style.warning = Style(style.default)
-     style.description = Style(style.default)
-     style.myBox = Style(style.default)
+    style.my_text = Style(style.default)
+    style.warning = Style(style.default)
+    style.description = Style(style.default)
+    style.myBox = Style(style.default)
+    style.navigation_button = Style(style.button_text)
+    # style.navigation_button.background = Frame("images/interface/music_library_button.png", 25, 25)
+    # style.navigation_button.hover_background = Frame("images/interface/music_library_button_hover.png", 25, 25)
+    # style.navigation_button.selected_background = Frame("images/interface/music_library_button_selected.png", 25, 25)
+    style.navigation_button_text.color = "#FFFFFF"
+    style.navigation_button_text.outlines = [(1, "#000000", 0, 0)]
+    style.navigation_button_text.hover_color = "#0000FF"
+    style.navigation_button_text.selected_color = "#00FF00"
      
 style my_text is text:
     size 15
