@@ -1,6 +1,6 @@
 ﻿init -3 python:
     i = 500
-    curloc = 'home'
+    curloc = 'loc_home'
     is_library = 1
     is_wall = 1
     students = 50

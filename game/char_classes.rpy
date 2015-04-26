@@ -30,10 +30,10 @@ init -20 python:
             self.money = money
             self.beauty = beauty
             self.dirty = dirty
-            
+            self.rep = rep
             self.say = Character (self.name, kind=adv, dynamic = False, color = self.color, show_side_image = Image(self.picto, xalign=0.0, yalign=1.0), window_left_padding = 170)
             config.side_image_tag = self.picto
-            self.rep = rep
+
 
 #Добавление нескольких предметов в инвентарь        
         def addItems(self,*args):

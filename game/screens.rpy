@@ -651,10 +651,11 @@ screen stats_screen:
                 text "Ваше желание " style style.my_text
                 text ' [temp]' style style.my_text
     
-    vbox xalign 0.99 yalign 0.0:
-        imagebutton auto "pic/actions/eye_%s.png" action [Hide('stats_screen'),Jump('locationPeople')]
+    vbox xalign 0.99 yalign 0.01:
         imagebutton auto "pic/actions/wait15_%s.png" action [Function(waiting,15)]
         imagebutton auto "pic/actions/wait60_%s.png" action [Function(waiting,60)]
+        if len(getLoc(curloc).people) > 0:
+            imagebutton auto "pic/actions/eye_%s.png" action [Hide('stats_screen'),Jump('locationPeople')]
 
 
 screen char_select:

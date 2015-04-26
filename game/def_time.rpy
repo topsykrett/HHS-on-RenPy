@@ -93,8 +93,3 @@ init -3 python:
         #Ночь
         if hour > 20 or hour < 6: result = -4
         return result
-
-    def waiting(t):
-        player.energy -= randf(t/3,t/2)
-        changetime(t)
-        move(curloc)

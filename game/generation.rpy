@@ -535,7 +535,7 @@ label skipall:
         mustangovich = Char(
             fname = 'Ахмед',
             lname = 'Мустангович',
-            age = 21,
+            age = 22,
             sex = 'male',
             bsize = 0,
             psize = 30,
@@ -573,3 +573,4 @@ label skipall:
     $ studs = _studs
     $ teachers = _teachers
     $ move("loc_home")
+   

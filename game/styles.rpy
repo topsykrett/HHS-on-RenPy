@@ -4,8 +4,8 @@ init python:
     style.description = Style(style.default)
     style.myBox = Style(style.default)
     style.navigation_button = Style(style.button_text)
-    # style.navigation_button.background = Frame("images/interface/music_library_button.png", 25, 25)
-    # style.navigation_button.hover_background = Frame("images/interface/music_library_button_hover.png", 25, 25)
+    # style.navigation_button.background = Frame("pic/bg.png", 25, 25)
+    # style.navigation_button.hover_background = Frame("pic/bg.png", 25, 25)
     # style.navigation_button.selected_background = Frame("images/interface/music_library_button_selected.png", 25, 25)
     style.navigation_button_text.color = "#FFFFFF"
     style.navigation_button_text.outlines = [(1, "#000000", 0, 0)]

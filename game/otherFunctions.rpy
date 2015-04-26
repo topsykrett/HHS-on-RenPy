@@ -1,5 +1,6 @@
 init -5 python:
     import random
+    import time
     def rand(a, b):
         return random.randint(a,b)
         
@@ -53,9 +54,24 @@ init -5 python:
     def getChar(*args):
         if len(args) == 0:
             return allChars[rand(0,len(allChars)-1)]
+            
         if len(args) == 1:
             temp = []
+            if len(getLoc(curloc).people) > 0:
+                for char in getLoc(curloc).people:
+                    if char.sex == args[0]:
+                        temp.append(char)
+                if len(temp) > 0:
+                    if len(temp) == 1:
+                        return temp[0]
+                    else:
+                        return temp[rand(0,len(temp)-1)]
+
             for char in allChars:
                 if char.sex == args[0]:
                     temp.append(char)
             return temp[rand(0,len(temp)-1)]
+            
+            
+    def skipEvent():
+        tryEvent(curloc)
