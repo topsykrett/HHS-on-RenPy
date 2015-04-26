@@ -23,6 +23,7 @@ init -2 python:
     _studs = []
     _allStuds = []
     _allChars = []
+    _teachers = []
     #будущий массив студентов
     #Массивы имён
     fn_male = ['Александр','Андрей','Владимир','Алексей','Дмитрий','Николай','Евгений','Иван','Михаил','Егор','Тимур','Руслан','Максим','Даниил','Кирилл','Никита','Денис','Илья','Артем','Артур','Роман','Богдан','Глеб','Захар','Владислав','Ян','Павел','Юрий','Антон','Игорь','Степан','Вадим','Семен','Лев','Федор','Филипп','Виктор','Виталий','Олег']
@@ -46,8 +47,8 @@ init -2 python:
 #####################################################
 
 init -1 python:
-    _fname = ''
-    _lname = ''
+    _fname = 'Имя'
+    _lname = 'Фамилия'
     _age = 25
     _beauty = 20
     _health = 700
@@ -60,15 +61,7 @@ init -1 python:
     _picture = 'pic/events/students/picto/female/1.jpg'
     history = 0
     answer = [0,0,0,0,0]
-    
-    leg = BodyPart('ноги', True, False)
-    face = BodyPart('лицо', True, False)
-    chest = BodyPart('грудь', True, False)
-    vagina = BodyPart('вагина', False, False)
-    anus = BodyPart('анус', False, False)
-    mouth = BodyPart('рот', False, False)
-    hands = BodyPart('руки', True, False)
-    
+
 
 label gendir:
     show white
@@ -246,21 +239,13 @@ label skipall:
             beauty = _beauty,
             dirty = 0,
             rep = 0,
-            body = [face,hands,chest,leg,mouth,vagina,anus]
+            body = genBody()
             )
         
 #####################################################
 #Генерация и создание студентов
 #####################################################
         for x in range(1,students+1):
-            #Части тела
-            leg = BodyPart('ноги', True, False)
-            face = BodyPart('лицо', True, False)
-            chest = BodyPart('грудь', True, False)
-            vagina = BodyPart('вагина', False, False)
-            anus = BodyPart('анус', False, False)
-            mouth = BodyPart('рот', False, False)
-            hands = BodyPart('руки', True, False)
             #выбор пола
             _rand = rand(1, 10)
             if _rand < 5:
@@ -371,18 +356,220 @@ label skipall:
                 intel = _intel,
                 location = 'street',
                 money = rand(0,100),
-                beauty = rand(300,850),
+                beauty = rand(30,85),
                 dirty = 0,
                 rep = 50,
-                body = [face,hands,chest,leg,mouth,vagina,anus]
+                body = genBody()
                 )
             #Добавление объекта к массиву студентов
             _studs.append(temp_char)
+            
+#######################################################
+#Создание учителей
+#######################################################
+        kupruvna = Char(
+            fname = 'Валентина',
+            lname = 'Купрувна',
+            age = 37,
+            sex = 'female',
+            bsize = 5,
+            psize = 0,
+            vsize = 8,
+            asize = 0,
+            height = 170,
+            color = '#FF85F1',
+            loy = randf(10,20),
+            fun = randf(0,50),
+            inventory = [],
+            wear = [],
+            corr = 0,
+            lust = 0,
+            will = 25,
+            edu = 60,
+            club = 'химия',
+            picto = 'pic/events/teachers/50/picto.png',
+            health = 1000,
+            energy = 1000,
+            intel = 50,
+            location = curloc,
+            money = 10000,
+            beauty = 40,
+            dirty = 0,
+            rep = 0,
+            body = genBody()
+            )
+        _teachers.append(kupruvna)
         
+        danokova = Char(
+            fname = 'Полина',
+            lname = 'Данокова',
+            age = 25,
+            sex = 'female',
+            bsize = 2,
+            psize = 0,
+            vsize = 5,
+            asize = 0,
+            height = 160,
+            color = '#FF85F1',
+            loy = randf(10,20),
+            fun = randf(0,50),
+            inventory = [],
+            wear = [],
+            corr = 0,
+            lust = 0,
+            will = 45,
+            edu = 20,
+            club = 'биология',
+            picto = 'pic/events/teachers/51/picto.png',
+            health = 1000,
+            energy = 1000,
+            intel = 100,
+            location = curloc,
+            money = 5000,
+            beauty = 60,
+            dirty = 0,
+            rep = 0,
+            body = genBody()
+            )
+        _teachers.append(danokova)
+        
+        frigidovna = Char(
+            fname = 'Ангелина',
+            lname = 'Фригидовна',
+            age = 32,
+            sex = 'female',
+            bsize = 6,
+            psize = 0,
+            vsize = 0,
+            asize = 0,
+            height = 175,
+            color = '#FF85F1',
+            loy = randf(10,20),
+            fun = randf(0,50),
+            inventory = [],
+            wear = [],
+            corr = 0,
+            lust = 0,
+            will = 30,
+            edu = 15,
+            club = 'сексуальное просвящение',
+            picto = 'pic/events/teachers/52/picto.png',
+            health = 1000,
+            energy = 1000,
+            intel = 40,
+            location = curloc,
+            money = 5000,
+            beauty = 40,
+            dirty = 0,
+            rep = 0,
+            body = genBody()
+            )
+        _teachers.append(frigidovna)
+        
+        bissektrisovna = Char(
+            fname = 'Валентина',
+            lname = 'Биссектрисовна',
+            age = 35,
+            sex = 'female',
+            bsize = 3,
+            psize = 0,
+            vsize = 8,
+            asize = 0,
+            height = 165,
+            color = '#FF85F1',
+            loy = randf(10,20),
+            fun = randf(0,50),
+            inventory = [],
+            wear = [],
+            corr = 0,
+            lust = 0,
+            will = 60,
+            edu = 60,
+            club = 'математика',
+            picto = 'pic/events/teachers/53/picto.png',
+            health = 1000,
+            energy = 1000,
+            intel = 40,
+            location = curloc,
+            money = 5000,
+            beauty = 85,
+            dirty = 0,
+            rep = 0,
+            body = genBody()
+            )
+        _teachers.append(bissektrisovna)
+        
+        dikovna = Char(
+            fname = 'Анжела',
+            lname = 'Диковна',
+            age = 23,
+            sex = 'futa',
+            bsize = 5,
+            psize = 20,
+            vsize = 8,
+            asize = 4,
+            height = 180,
+            color = '#FC3A3A',
+            loy = randf(10,20),
+            fun = randf(0,50),
+            inventory = [],
+            wear = [],
+            corr = 20,
+            lust = 0,
+            will = 30,
+            edu = 50,
+            club = 'английский язык',
+            picto = 'pic/events/teachers/54/picto.png',
+            health = 1000,
+            energy = 1000,
+            intel = 50,
+            location = curloc,
+            money = 5000,
+            beauty = 60,
+            dirty = 0,
+            rep = 0,
+            body = genBody()
+            )
+        _teachers.append(dikovna)
+
+        mustangovich = Char(
+            fname = 'Ахмед',
+            lname = 'Мустангович',
+            age = 21,
+            sex = 'male',
+            bsize = 0,
+            psize = 30,
+            vsize = 0,
+            asize = 0,
+            height = 190,
+            color = '#269AFF',
+            loy = randf(40,60),
+            fun = randf(0,50),
+            inventory = [],
+            wear = [],
+            corr = 0,
+            lust = 0,
+            will = 15,
+            edu = 300,
+            club = 'физкультура',
+            picto = 'pic/events/teachers/55/picto.png',
+            health = 1500,
+            energy = 1500,
+            intel = 40,
+            location = curloc,
+            money = 200,
+            beauty = 40,
+            dirty = 0,
+            rep = 0,
+            body = genBody()
+            )
+        _teachers.append(mustangovich)
 #######################################################
 #Пересохранение этого добра для того, чтобы сохранялось.
 #######################################################
     $ _allChars.extend(_studs)
+    $ _allChars.extend(_teachers)
     $ allChars = _allChars
     $ studs = _studs
+    $ teachers = _teachers
     $ move("loc_home")

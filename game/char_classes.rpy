@@ -174,3 +174,20 @@ init -20 python:
             self.name = name
             self.visibility = visibility
             self.sperm = sperm
+        
+    def genBody():
+        leg = BodyPart('ноги', True, False)
+        face = BodyPart('лицо', True, False)
+        chest = BodyPart('грудь', True, False)
+        vagina = BodyPart('вагина', False, False)
+        anus = BodyPart('анус', False, False)
+        mouth = BodyPart('рот', False, False)
+        hands = BodyPart('руки', True, False)
+        body = [face,hands,chest,leg,mouth,vagina,anus]
+        return body
+        
+    def getCharByName(name):
+        global allChars
+        for x in allChars:
+            if x.name == name:
+                return x
