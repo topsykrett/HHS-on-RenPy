@@ -51,3 +51,6 @@ log.txt
 *.txt
 *.txt
 game/saves/persistent
+game/saves/persistent
+*.txt
+tmp/navigation.json
