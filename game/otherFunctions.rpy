@@ -1,13 +1,14 @@
 init -5 python:
     import random
     import time
+    from operator import attrgetter
     
     dublicationChar = []
     
     def rand(a, b):
-        if a == b:
-            return a
-        else:
+        if b == 0:
+            return b
+        else :
             return random.randint(a,b)
         
     def randf(a, b):
@@ -59,11 +60,12 @@ init -5 python:
 #Работа с людьми
     def getChar(*args):
         global dublicationChar
+        temp = []
+        
         if len(args) == 0:
             return allChars[rand(0,len(allChars)-1)]
             
         if len(args) == 1:
-            temp = []
             if len(getLoc(curloc).people) > 0:
                 for char in getLoc(curloc).people:
                     if char.sex == args[0] and teachers.count(char) == 0 and dublicationChar.count(char) == 0:
@@ -84,6 +86,21 @@ init -5 python:
                 dublicationChar = []
             return temp[rands]
             
+        if len(args) == 2:
+            for x in studs:
+                if x.sex == args[0]:
+                    temp.append(x)
+            tempChar = temp[0]
+            if args[1] == 'beautymax':
+                for x in temp:
+                    if x.beauty > tempChar.beauty:
+                        tempChar = x
+                return tempChar
+            if args[1] == 'beautymin':
+                for x in temp:
+                    if x.beauty < tempChar.beauty:
+                        tempChar = x
+                return tempChar
             
     def skipEvent():
         tryEvent(curloc)

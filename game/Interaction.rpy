@@ -1,4 +1,31 @@
 init python:
+    
+    
+    class Dialogue():
+        def __init__(self, id, corr):
+            self.id = id
+            self.corr = corr
+    
+    def dialogueParser():
+        _locs = renpy.get_all_labels()
+        textList = []
+        for textLable in _locs: # перебираем все лейблы
+            if textLable[:7] == 'dialog_': #находим тот, что с текстом
+                corr = textLable.split("_")
+                corr = corr[1]
+                tempText = Dialogue(id = textLable, corr = int(corr))
+                textList.append(tempText)
+        return textList
+    
+    dialogueList = dialogueParser()
+    
+    def dialogueSelector(speaker):
+        tempList = []
+        for x in dialogueList:
+            if speaker.corr >= x.corr:
+                tempList.append(x)
+        return tempList[rand(0,len(tempList) - 1)].id
+
     dummy = Char(
         fname = '',
         lname = '',
@@ -109,19 +136,30 @@ screen show_stat():
             textbutton 'Поговорить' xminimum 200 action Jump('speak') 
             textbutton 'Флирт' xminimum 200 action Jump('flirt')
             textbutton 'Назад' xminimum 200 action [Hide('show_stat'), Function(move,curloc)]
+      
 label speak:
+    if lt() > 0 or lt() == -2: 
+        $ renpy.jump('exitInteraction')
     $ user = showHover
-
-    user.say 'И тебе!'
-    player.say 'И тебе!'
+    $ changetime(10)
+    $ player.energy -= rand(5,10)
+    $ user.loy += 100
+    $ renpy.jump(dialogueSelector(user))
     
     call screen show_stat
     
 label flirt:
+    if lt() > 0 or lt() == -2: 
+        $ renpy.jump('exitInteraction')
+        
     $ user = showHover
     
     player.say 'Ого какие сиськи!'
     user.say 'Ага!'
     
     call screen show_stat
+
+label exitInteraction:
+    showHover.say 'Простите, мне пора на урок!'
     
+    $ move(curloc)
