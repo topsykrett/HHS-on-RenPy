@@ -40,31 +40,31 @@ label locationPeople:
     $ renpy.call_screen(lastView)
 
 
-screen locationPeopleList:
-    tag interface
-    fixed xpos 0.01 ypos 0.01:
-        $ yalig = 0
-        $ xalig = 0.0
-        for x in getLoc(curloc).people:
-            $ yalig += 0.05
-            textbutton '[x.name]' xalign xalig yalign yalig xminimum 280 action [SetVariable('interactionObj',x), Show('show_stat')]
-            if yalig >= 0.8:
-                $ yalig = 0
-                $ xalig += 0.35
-        hbox:
-            textbutton 'Назад' action [Show('stats_screen'), Function(move, curloc)]
-            textbutton 'Картинки' action [SetVariable('lastView','locationPeoplePicto'), Show('locationPeoplePicto')]
+# screen locationPeopleList:
+    # tag interface
+    # fixed xpos 0.01 ypos 0.01:
+        # $ yalig = 0
+        # $ xalig = 0.0
+        # for x in getLoc(curloc).people:
+            # $ yalig += 0.05
+            # textbutton '[x.name]' xalign xalig yalign yalig xminimum 280 action [SetVariable('interactionObj',x), Show('show_stat')]
+            # if yalig >= 0.8:
+                # $ yalig = 0
+                # $ xalig += 0.35
+        # hbox:
+            # textbutton 'Назад' action [Hide('charInfoLeft'), Show('stats_screen'), Function(move, curloc)]
+            # textbutton 'Картинки' action [SetVariable('lastView','locationPeoplePicto'), Show('locationPeoplePicto')]
         
 
 screen locationPeoplePicto:
     tag interface
-
     fixed xpos 0.01 ypos 0.01:
+        textbutton 'Назад' action [ Hide('charInfoLeft'), Show('stats_screen'), Function(move, curloc)]
+        
         $ xalig = 0.2
         $ yalig = 0.05
-
         for x in getLoc(curloc).people:
-            imagebutton idle im.FactorScale(x.picto,0.5) hover im.FactorScale(x.picto,0.6) xalign xalig yalign yalig action [SetVariable('interactionObj',x), Show('show_stat')] hovered [SetVariable('showHover',x),Show('CharInfoLeft')]
+            imagebutton idle im.FactorScale(x.picto,0.5) hover im.FactorScale(x.picto,0.6) xalign xalig yalign yalig action [Hide('charInfoLeft'), SetVariable('interactionObj',x), Show('show_stat')] hovered [SetVariable('showHover',x),Show('charInfoLeft')]
             # add im.FactorScale(x.picto,0.6) xalign xalig yalign yalig
             $ xalig += 0.09
             if xalig >= 0.99:
@@ -99,8 +99,29 @@ screen show_stat():
             $ temp = round(showHover.beauty,1)
             text 'Красота [temp]' style style.my_text
             null height 10
-            textbutton 'Назад' action Show(lastView)
-            
+           
     fixed xpos 0.3 ypos 0.1 :
         vbox xmaximum config.screen_width/2:
             text textgen(showHover) style style.my_text
+    
+    fixed xpos 0.8 ypos 0.1:
+        vbox:
+            textbutton 'Поговорить' xminimum 200 action Jump('speak') 
+            textbutton 'Флирт' xminimum 200 action Jump('flirt')
+            textbutton 'Назад' xminimum 200 action [Hide('show_stat'), Function(move,curloc)]
+label speak:
+    $ user = showHover
+
+    user.say 'И тебе!'
+    player.say 'И тебе!'
+    
+    call screen show_stat
+    
+label flirt:
+    $ user = showHover
+    
+    player.say 'Ого какие сиськи!'
+    user.say 'Ага!'
+    
+    call screen show_stat
+    

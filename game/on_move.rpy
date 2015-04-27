@@ -23,14 +23,15 @@ init python:
 
             if where[:4] == 'loc_' and getLoc(where).position != 'tech': #Если локация - локация и если она не техническая
                 addPeopleLocation(where) #Добавление людей на локацию
-                if rand(0,99) < 10 + (ptime - lastEventTime)*10: tryEvent(where) # попытка дёрнуть рандомный эвент с локации. Чем больше эвентов, тем больше шанс
                 if where != curloc:
                     prevloc = curloc
                     curloc = where
                     same_loc = 0
                 else:
                     same_loc = 1
-                
+
+            if rand(0,99) < 10 + (ptime - lastEventTime)*10: tryEvent(where) # попытка дёрнуть рандомный эвент с локации. Чем больше прошло времени с последнего, тем выше шанс.
+
             renpy.retain_after_load() # чтобы сохранялся интерфейс, иначе ошибка
             
             renpy.show_screen('stats_screen') #При перемещении всегда появляется интерфейс
@@ -48,16 +49,19 @@ init python:
             
 #Вызов эвента
     def tryEvent(location):
+        if getLoc(location).position == 'classroom' and lt() > 0: location += 'Learn' #Если сейчас уроки, то добавляем к поиску локаций Learn
+        if lt() == -4: location += 'Night'
         tempEv = []
         for x in locations: #перебираем локи и ищем подходящие эвенты
             if x.id == location:
                 for event in x.events:
-                    if x.position != 'tech':
-                        if event.corr <= getPar(studs, 'corr'):
-                            tempEv.append(event)
-                    else :
+                    if x.position == 'self':
                         if event.corr <= player.corr:
                             tempEv.append(event)
+                    else :
+                        if event.corr <= getPar(studs, 'corr'):
+                            tempEv.append(event)
+
         if len(tempEv) > 0:
             renpy.hide_screen('stats_screen')
             rands = rand(0,len(tempEv)-1)

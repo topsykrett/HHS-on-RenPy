@@ -7,7 +7,7 @@ label notebook:
 screen notebook:
     fixed xpos 0.01 ypos 0.01:
         hbox :
-            textbutton 'Назад' action [Show('stats_screen'), Hide('studList'), Hide('teacherList'), Function(move, curloc)]
+            textbutton 'Назад' action [Show('stats_screen'), Hide('studList'), Hide('teacherList'), Hide('personalInfo'), Hide('charInfoLeft'), Function(move, curloc)]
             textbutton 'Вы' action [Hide ('charInfoLeft'), Show('personalInfo')]
             textbutton 'Список учеников' action Show('studList')
             textbutton 'Список учителей' action Show('teacherList')
@@ -38,7 +38,6 @@ screen teacherList:
                 $ xalig = 0.17
 
 screen charInfoLeft:
-    tag interface
     vbox xpos 0.01 ypos 0.1:
         if showHover.age > 0:
             add showHover.picto
@@ -63,7 +62,7 @@ screen charInfoLeft:
             text 'Красота [temp]' style style.my_text
 
 screen personalInfo:
-    tag notebookList interface
+    tag notebookList
     fixed xpos 0.1 ypos 0.1:
         vbox:
             add player.picto

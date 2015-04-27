@@ -565,7 +565,7 @@ init -2 python:
 #
 
 screen stats_screen:
-    tag interface
+ #   tag interface
     fixed xpos 0.01 ypos 0.01:
         vbox xmaximum config.screen_width/2:
             $ currtime = gettime()

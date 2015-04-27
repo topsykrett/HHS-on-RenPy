@@ -85,9 +85,9 @@ init -3 python:
         if hour == 13 and minute > 40: result = 0
         #шестой урок
         if hour == 14 and minute <=40: result = 6
-        if hour == 14 and minute > 40: result = -1
+        if hour == 14 and minute > 40: result = 0
         #внеурочное время
-        if hour <= 7 or hour >= 15: result = -2
+        if hour <= 7 or hour >= 15: result = -1
         #Выходные
         if weekday == 6 or weekday == 7: result = -3
         #Ночь

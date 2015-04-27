@@ -1,52 +1,58 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/notebook.rpy", line 5, in script
-    call screen notebook
-  File "renpy/common/000statements.rpy", line 457, in execute_call_screen
-    store._return = renpy.call_screen(name, *args, **kwargs)
-  File "renpy/common/00action_control.rpy", line 105, in __call__
-    renpy.show_screen(self.screen, *self.args, **self.kwargs)
-Exception: Screen CharInfoLeft is not known.
-
+  File "game/Interaction.rpy", line 40, in script
+    $ renpy.call_screen(lastView)
+  File "game/Interaction.rpy", line 40, in <module>
+    $ renpy.call_screen(lastView)
+  File "renpy/common/00action_other.rpy", line 403, in __call__
+    self.callable(*self.args, **self.kwargs)
+TypeError: 'str' object is not callable
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/notebook.rpy", line 5, in script
-    call screen notebook
-  File "E:\RenPy\renpy-6.99.1-sdk\renpy\ast.py", line 1641, in execute
-    self.call("execute")
-  File "E:\RenPy\renpy-6.99.1-sdk\renpy\ast.py", line 1659, in call
-    renpy.statements.call(method, parsed, *args, **kwargs)
-  File "E:\RenPy\renpy-6.99.1-sdk\renpy\statements.py", line 144, in call
-    return method(parsed, *args, **kwargs)
-  File "renpy/common/000statements.rpy", line 457, in execute_call_screen
-    store._return = renpy.call_screen(name, *args, **kwargs)
-  File "E:\RenPy\renpy-6.99.1-sdk\renpy\exports.py", line 2344, in call_screen
+  File "game/Interaction.rpy", line 40, in script
+    $ renpy.call_screen(lastView)
+  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\ast.py", line 785, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\python.py", line 1432, in py_exec_bytecode
+    exec bytecode in globals, locals
+  File "game/Interaction.rpy", line 40, in <module>
+    $ renpy.call_screen(lastView)
+  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\exports.py", line 2344, in call_screen
     rv = renpy.ui.interact(mouse="screen", type="screen", roll_forward=roll_forward)
-  File "E:\RenPy\renpy-6.99.1-sdk\renpy\ui.py", line 247, in interact
+  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\ui.py", line 247, in interact
     rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "E:\RenPy\renpy-6.99.1-sdk\renpy\display\core.py", line 2243, in interact
+  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\core.py", line 2243, in interact
     repeat, rv = self.interact_core(preloads=preloads, **kwargs)
-  File "E:\RenPy\renpy-6.99.1-sdk\renpy\display\core.py", line 2868, in interact_core
-    rv = renpy.display.focus.mouse_handler(ev, x, y)
-  File "E:\RenPy\renpy-6.99.1-sdk\renpy\display\focus.py", line 268, in mouse_handler
-    return change_focus(new_focus, default=default)
-  File "E:\RenPy\renpy-6.99.1-sdk\renpy\display\focus.py", line 246, in change_focus
-    rv = widget.focus(default=default)
-  File "E:\RenPy\renpy-6.99.1-sdk\renpy\display\behavior.py", line 657, in focus
-    rv = run(self.hovered)
-  File "E:\RenPy\renpy-6.99.1-sdk\renpy\display\behavior.py", line 283, in run
+  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\core.py", line 2871, in interact_core
+    rv = root_widget.event(ev, x, y, 0)
+  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\layout.py", line 857, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\layout.py", line 857, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\layout.py", line 857, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\screen.py", line 626, in event
+    rv = self.child.event(ev, x, y, st)
+  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\layout.py", line 857, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\layout.py", line 857, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\layout.py", line 857, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\behavior.py", line 778, in event
+    return handle_click(self.clicked)
+  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\behavior.py", line 721, in handle_click
+    rv = run(action)
+  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\behavior.py", line 283, in run
     new_rv = run(i, *args, **kwargs)
-  File "E:\RenPy\renpy-6.99.1-sdk\renpy\display\behavior.py", line 290, in run
+  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\behavior.py", line 290, in run
     return var(*args, **kwargs)
-  File "renpy/common/00action_control.rpy", line 105, in __call__
-    renpy.show_screen(self.screen, *self.args, **self.kwargs)
-  File "E:\RenPy\renpy-6.99.1-sdk\renpy\display\screen.py", line 804, in show_screen
-    raise Exception("Screen %s is not known.\n" % (name[0],))
-Exception: Screen CharInfoLeft is not known.
-
+  File "renpy/common/00action_other.rpy", line 403, in __call__
+    self.callable(*self.args, **self.kwargs)
+TypeError: 'str' object is not callable
 
 Windows-7-6.1.7601-SP1
 Ren'Py 6.99.1.329

@@ -10,10 +10,9 @@ init 10 python:
             self.people = []
             
         def getprob(self):
-            if lt() > 0 or lt() == -4:
-                return -1
-            else:
-                return self.base_prob
+            if lt() > 0 or lt() == -4: return -1 #Если ночь, то на улице никого нет
+            elif self.position in ['classroom', 'school'] and lt() == -1: return self.base_prob/4 #Если внеурочное время, то в школе шансов встретить меньше
+            else : return self.base_prob #Иначе настоящая вероятность.
     
     class Event:
         def __init__(self,id,corr):
@@ -62,22 +61,29 @@ init 10 python:
             elif x == 'loc_entrance': loc = Location(id = x, name = 'вход', base_prob = 15, position = 'school')
             elif x == 'loc_library': loc = Location(id = x, name = 'библиотека', base_prob = 10, position = 'school')
             elif x == 'loc_changeRoom': loc = Location(id = x, name = 'школьная раздевалка', base_prob = 5, position = 'school')
-            elif x == 'loc_gym': loc = Location(id = x, name = 'спортивный зал', base_prob = 25, position = 'school')
-            elif x == 'loc_pool': loc = Location(id = x, name = 'бассейн', base_prob = 15, position = 'school')
+            elif x == 'loc_gym': loc = Location(id = x, name = 'спортивный зал', base_prob = 25, position = 'classroom')
+            elif x == 'loc_pool': loc = Location(id = x, name = 'бассейн', base_prob = 15, position = 'classroom')
             elif x == 'loc_firstFloor': loc = Location(id = x, name = 'первый этаж', base_prob = 20, position = 'school')
             elif x == 'loc_secondFloor': loc = Location(id = x, name = 'второй этаж', base_prob = 20, position = 'school')
-            elif x == 'loc_class1': loc = Location(id = x, name = 'Класс 1', base_prob = 10, position = 'school')
-            elif x == 'loc_class2': loc = Location(id = x, name = 'Класс 2', base_prob = 10, position = 'school')
-            elif x == 'loc_class3': loc = Location(id = x, name = 'Класс 3', base_prob = 10, position = 'school')
-            elif x == 'loc_class4': loc = Location(id = x, name = 'Класс 4', base_prob = 10, position = 'school')
-            elif x == 'loc_class5': loc = Location(id = x, name = 'Класс 5', base_prob = 10, position = 'school')
+            elif x == 'loc_class1': loc = Location(id = x, name = 'Класс 1', base_prob = 10, position = 'classroom')
+            elif x == 'loc_class2': loc = Location(id = x, name = 'Класс 2', base_prob = 10, position = 'classroom')
+            elif x == 'loc_class3': loc = Location(id = x, name = 'Класс 3', base_prob = 10, position = 'classroom')
+            elif x == 'loc_class4': loc = Location(id = x, name = 'Класс 4', base_prob = 10, position = 'classroom')
+            elif x == 'loc_class5': loc = Location(id = x, name = 'Класс 5', base_prob = 10, position = 'classroom')
             elif x == 'loc_teacherRoom': loc = Location(id = x, name = 'учительская', base_prob = 0, position = 'school')
             elif x == 'loc_wcm': loc = Location(id = x, name = 'Туалет для мальчиков', base_prob = 5, position = 'school')
             elif x == 'loc_wcf': loc = Location(id = x, name = 'Туалет для девочек', base_prob = 5, position = 'school')
             elif x == 'loc_storage': loc = Location(id = x, name = 'кладовка', base_prob = 5, position = 'school')
             elif x == 'loc_office': loc = Location(id = x, name = 'офис', base_prob = 0, position = 'school')
             
-            elif x == 'loc_dreams': loc = Location(id = x, name = 'Сны', base_prob = 0, position = 'tech')
+            elif x == 'loc_dreams': loc = Location(id = x, name = 'Сны', base_prob = 0, position = 'self')
+            elif x == 'loc_class1Learn': loc = Location(id = x, name = 'Учёба', base_prob = 0, position = 'tech')
+            elif x == 'loc_class2Learn': loc = Location(id = x, name = 'Учёба', base_prob = 0, position = 'tech')
+            elif x == 'loc_class3Learn': loc = Location(id = x, name = 'Учёба', base_prob = 0, position = 'tech')
+            elif x == 'loc_class4Learn': loc = Location(id = x, name = 'Учёба', base_prob = 0, position = 'tech')
+            elif x == 'loc_class5Learn': loc = Location(id = x, name = 'Учёба', base_prob = 0, position = 'tech')
+            elif x == 'loc_gymLearn': loc = Location(id = x, name = 'Учёба', base_prob = 0, position = 'tech')
+            elif x == 'loc_poolLearn': loc = Location(id = x, name = 'Учёба', base_prob = 0, position = 'tech')
             
             else: loc = Location(id = x, name = 'UNKNOWN', base_prob = 0, position = 'other')
             locations.append(loc)
