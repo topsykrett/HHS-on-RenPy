@@ -1,14 +1,16 @@
 init -50 python:
     class Item:
-        def __init__ (self, name, cost, image):
+        def __init__ (self, name, cost, durability, picto):
+            self.durability = durability
             self.name = name
             self.cost = cost
-            self.image = image
-    
+            self.picto = picto
+            self.type = type
+            
     class Tool(Item):
-        def __init__ (self, count):
-            self.count = count
-    
+        def __init__ (self, purpose):
+            self.purpose = purpose
+            
     class Clothing(Item):
         def __init__ (self, cover, lust, corr, reputation):
             self.cover = cover
@@ -20,4 +22,4 @@ init -50 python:
             self.cover = cover
             self.soze = size
             self.corr = corr
-            self.lust = lust
+            self.lust = lust          

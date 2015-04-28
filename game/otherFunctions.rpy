@@ -85,10 +85,10 @@ init -5 python:
             if len(dublicationChar) > 10:
                 dublicationChar = []
             return temp[rands]
-            
+        
         if len(args) == 2:
             for x in studs:
-                if x.sex == args[0]:
+                if x.sex == args[0] or args[0] == '':
                     temp.append(x)
             tempChar = temp[0]
             if args[1] == 'beautymax':

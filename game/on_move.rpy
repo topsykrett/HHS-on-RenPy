@@ -30,7 +30,7 @@ init python:
                 else:
                     same_loc = 1
 
-            if rand(0,99) < 10 + (ptime - lastEventTime)*10: tryEvent(where) # попытка дёрнуть рандомный эвент с локации. Чем больше прошло времени с последнего, тем выше шанс.
+            if rand(0,99) < 10 + (ptime - lastEventTime)*10 and where[:4] == 'loc_': tryEvent(where) # попытка дёрнуть рандомный эвент с локации. Чем больше прошло времени с последнего, тем выше шанс.
 
             renpy.retain_after_load() # чтобы сохранялся интерфейс, иначе ошибка
             

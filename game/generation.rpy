@@ -2,17 +2,7 @@
 init -10 python:
     config.use_cpickle = True
     dynpicto = ''
-#############################################################
-#Создание айтемов
-#############################################################
-init -3 python:
-    #Cоздание предметов
-    napkin = Tool(count = 10)
-    napkin.name = 'Салфетка'
-    napkin.cost = 100
-    napkin.image = 'pic/items/towel_%s.jpg'
 
-    allItems = [napkin]
 init -2 python:
     #############################################################
     #Создание студентов

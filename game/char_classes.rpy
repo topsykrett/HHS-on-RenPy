@@ -1,4 +1,5 @@
 init -20 python:
+    import copy
     class Char:
         def __init__(self,fname,lname,age,sex,bsize,psize,vsize,asize,height,color,loy,fun,inventory,wear,corr,lust,will,edu,club,picto,energy,health,intel,location,body,money,beauty,rep,dirty):
             self.fname = fname
@@ -34,21 +35,24 @@ init -20 python:
             self.say = Character (self.name, kind=adv, dynamic = False, color = self.color, show_side_image = Image(self.picto, xalign=0.0, yalign=1.0), window_left_padding = 170)
             config.side_image_tag = self.picto
 
-
+###################################################################
+#инвентарь
+###################################################################
 #Добавление нескольких предметов в инвентарь        
         def addItems(self,*args):
             flag = 0
             for x in args:
                 for y in allItems:
                     if x == y.name:
-                        self.inventory.append(y)
+                        temp = copy.copy(y)
+                        self.inventory.append(temp)
                         flag += 1
             if flag == len(args):
                 return True
             else:
                 renpy.say('','ITEMS ARE NOT ADDED!')
                 return False
-                
+            
 #Добавлние одного предмета (можно использовать и addItems) просто на всякий пожарный.
         def addItem(self,name):
             flag = False
@@ -89,7 +93,19 @@ init -20 python:
                     return True
             return flag
 
-
+        def apply(self, name):
+            for x in self.inventory:
+                if x.name == name:
+                    x.durability -= 1
+                    self.checkDur()
+                    return
+                
+        def checkDur(self):
+            for x in self.inventory:
+                if x.durability <= 0:
+                    self.inventory.remove(x)
+                    
+                    
 #Вычисленная красота
         def getBeauty(self):
             return self.beauty - self.dirty*5
@@ -167,8 +183,9 @@ init -20 python:
         def setCorr(self,amount):
             self.corr += amount
 
-            
+###################################################################
 #Класс частей тела
+###################################################################
     class BodyPart():
         def __init__(self, name, visibility, sperm):
             self.name = name
@@ -191,3 +208,6 @@ init -20 python:
         for x in allChars:
             if x.name == name:
                 return x
+                
+                
+                
