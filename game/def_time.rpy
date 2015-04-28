@@ -45,7 +45,7 @@ init -3 python:
     def changetime(change):
         global minute, check_minute, hour, ptime, weekday, number, year, month, ptime
         minute += change
-        check_minute += change
+        # check_minute += change
         
         while minute >= 60:
             minute -= 60

@@ -1,58 +1,28 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/Interaction.rpy", line 40, in script
-    $ renpy.call_screen(lastView)
-  File "game/Interaction.rpy", line 40, in <module>
-    $ renpy.call_screen(lastView)
-  File "renpy/common/00action_other.rpy", line 403, in __call__
-    self.callable(*self.args, **self.kwargs)
-TypeError: 'str' object is not callable
+  File "game/Interaction.rpy", line 1, in script
+    init python:
+  File "game/Interaction.rpy", line 21, in <module>
+    dialogueList = dialogueParser()
+  File "game/Interaction.rpy", line 17, in dialogueParser
+    tempText = Dialogue(id = textLable, corr = int(corr), type = type)
+TypeError: __init__() got an unexpected keyword argument 'type'
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/Interaction.rpy", line 40, in script
-    $ renpy.call_screen(lastView)
+  File "game/Interaction.rpy", line 1, in script
+    init python:
   File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\ast.py", line 785, in execute
     renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
   File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\python.py", line 1432, in py_exec_bytecode
     exec bytecode in globals, locals
-  File "game/Interaction.rpy", line 40, in <module>
-    $ renpy.call_screen(lastView)
-  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\exports.py", line 2344, in call_screen
-    rv = renpy.ui.interact(mouse="screen", type="screen", roll_forward=roll_forward)
-  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\ui.py", line 247, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\core.py", line 2243, in interact
-    repeat, rv = self.interact_core(preloads=preloads, **kwargs)
-  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\core.py", line 2871, in interact_core
-    rv = root_widget.event(ev, x, y, 0)
-  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\layout.py", line 857, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\layout.py", line 857, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\layout.py", line 857, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\screen.py", line 626, in event
-    rv = self.child.event(ev, x, y, st)
-  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\layout.py", line 857, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\layout.py", line 857, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\layout.py", line 857, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\behavior.py", line 778, in event
-    return handle_click(self.clicked)
-  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\behavior.py", line 721, in handle_click
-    rv = run(action)
-  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\behavior.py", line 283, in run
-    new_rv = run(i, *args, **kwargs)
-  File "D:\Downloads\repy\renpy-6.99.1-sdk\renpy\display\behavior.py", line 290, in run
-    return var(*args, **kwargs)
-  File "renpy/common/00action_other.rpy", line 403, in __call__
-    self.callable(*self.args, **self.kwargs)
-TypeError: 'str' object is not callable
+  File "game/Interaction.rpy", line 21, in <module>
+    dialogueList = dialogueParser()
+  File "game/Interaction.rpy", line 17, in dialogueParser
+    tempText = Dialogue(id = textLable, corr = int(corr), type = type)
+TypeError: __init__() got an unexpected keyword argument 'type'
 
 Windows-7-6.1.7601-SP1
 Ren'Py 6.99.1.329

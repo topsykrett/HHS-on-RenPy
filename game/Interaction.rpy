@@ -1,10 +1,10 @@
 init python:
-    
-    
+
     class Dialogue():
-        def __init__(self, id, corr):
+        def __init__(self, id, corr, type):
             self.id = id
             self.corr = corr
+            self.type = type
     
     def dialogueParser():
         _locs = renpy.get_all_labels()
@@ -12,8 +12,9 @@ init python:
         for textLable in _locs: # перебираем все лейблы
             if textLable[:7] == 'dialog_': #находим тот, что с текстом
                 corr = textLable.split("_")
-                corr = corr[1]
-                tempText = Dialogue(id = textLable, corr = int(corr))
+                type = corr[1]
+                corr = corr[2]
+                tempText = Dialogue(id = textLable, corr = int(corr), type = type)
                 textList.append(tempText)
         return textList
     
@@ -22,7 +23,7 @@ init python:
     def dialogueSelector(speaker):
         tempList = []
         for x in dialogueList:
-            if speaker.corr >= x.corr:
+            if speaker.corr >= x.corr and ((speaker in studs and x.type == 'stud') or (speaker in teachers and x.type == 'teacher')):
                 tempList.append(x)
         return tempList[rand(0,len(tempList) - 1)].id
 

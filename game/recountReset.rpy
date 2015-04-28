@@ -1,5 +1,5 @@
 init python:
     def dailyRecount(chars):
-        qwe = 1
-        
-        
+        for x in studs:
+            x.setCorr((getPar(teachers, 'corr') - x.corr)/10)
+            x.rep += ((getPar(studs, 'rep') - x.rep)/100)

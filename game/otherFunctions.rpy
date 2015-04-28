@@ -101,6 +101,38 @@ init -5 python:
                     if x.beauty < tempChar.beauty:
                         tempChar = x
                 return tempChar
-            
+            if args[1] == 'edumax':
+                for x in temp:
+                    if x.edu > tempChar.edu:
+                        tempChar = x
+                return tempChar
+            if args[1] == 'edumin':
+                for x in temp:
+                    if x.edu < tempChar.edu:
+                        tempChar = x
+                return tempChar
+            if args[1] == 'corrmax':
+                for x in temp:
+                    if x.corr > tempChar.corr:
+                        tempChar = x
+                return tempChar
+            if args[1] == 'corrmin':
+                for x in temp:
+                    if x.corr < tempChar.corr:
+                        tempChar = x
+                return tempChar
+            if args[1] == 'lustmax':
+                for x in temp:
+                    if x.lust > tempChar.lust:
+                        tempChar = x
+                return tempChar
+            if args[1] == 'lustmin':
+                for x in temp:
+                    if x.lust < tempChar.lust:
+                        tempChar = x
+                return tempChar
+                
+                
+                
     def skipEvent():
         tryEvent(curloc)
