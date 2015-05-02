@@ -58,7 +58,8 @@ init -20 python:
             flag = False
             for x in allItems:
                 if name == x.name:
-                    self.inventory.append(x)
+                    temp = copy.copy(x)
+                    self.inventory.append(temp)
                     flag = True
             return flag
 
@@ -87,12 +88,18 @@ init -20 python:
                 return False
                 
         def hasItem(self, name):
-            flag = False
             for x in self.inventory:
                 if name == x.name:
                     return True
-            return flag
-
+            return False
+            
+        def countItem(self, name):
+            counter = 0
+            for x in self.inventory:
+                if name == x.name:
+                    counter += 1
+            return counter
+            
         def apply(self, name):
             for x in self.inventory:
                 if x.name == name:
@@ -105,6 +112,15 @@ init -20 python:
                 if x.durability <= 0:
                     self.inventory.remove(x)
                     
+        def eat(self, food):
+            global last_eat
+            if food.name == 'Энергетик':
+                last_eat -= 2
+            else:
+                last_eat = ptime
+            self.energy += food.energy
+            food.durability -= 1
+            self.checkDur()
                     
 #Вычисленная красота
         def getBeauty(self):
@@ -160,7 +176,27 @@ init -20 python:
                 for y in self.body:
                     if x == y.name:
                         y.sperm = False
-                        
+
+        def buy(self, item, *args):
+            if len(args) == 0:
+                if self.money >= item.cost:
+                    self.money -= item.cost
+                    if self.hasItem(item.name) == True:
+                        self.getItem(item.name).durability += item.durability
+                    else :
+                        temp = copy.copy(item)
+                        self.inventory.append(temp)
+            else :
+                 if self.money >= item.cost:
+                    self.money -= item.cost
+                    temp = copy.copy(item)
+                    self.inventory.append(temp)
+        
+        def getItem(self,name):
+            for x in self.inventory:
+                if x.name == name:
+                    return x
+
 #Сброс переменных
         def reset(self):
             self.bsize = min(max(self.bsize,0),10)

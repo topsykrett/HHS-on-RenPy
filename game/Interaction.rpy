@@ -87,7 +87,7 @@ label locationPeople:
 screen locationPeoplePicto:
     tag interface
     fixed xpos 0.01 ypos 0.01:
-        textbutton 'Назад' action [ Hide('charInfoLeft'), Show('stats_screen'), Function(move, curloc)]
+        textbutton 'Назад' action Function(move, curloc)
         
         $ xalig = 0.2
         $ yalig = 0.05
@@ -136,7 +136,7 @@ screen show_stat():
         vbox:
             textbutton 'Поговорить' xminimum 200 action Jump('speak') 
             textbutton 'Флирт' xminimum 200 action Jump('flirt')
-            textbutton 'Назад' xminimum 200 action [Hide('show_stat'), Function(move,curloc)]
+            textbutton 'Назад' xminimum 200 action Function(move,curloc)
       
 label speak:
     if lt() > 0 or lt() == -2: 

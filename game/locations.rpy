@@ -93,91 +93,91 @@ init 10 python:
 ######################################################
 #Объявление всех картинок
 init:
-    image home = im.FactorScale('pic/locations/home/1.jpg', 1.5)
-    image bedroom = im.FactorScale('pic/locations/home/2.jpg', 1.5)
-    image bathroom = im.FactorScale('pic/locations/home/3.jpg', 1.5)
-    image kitchen = im.FactorScale('pic/locations/home/4.jpg', 1.5)
+    image home = im.Scale('pic/locations/home/1.jpg', config.screen_width, config.screen_height)
+    image bedroom = im.Scale('pic/locations/home/2.jpg', config.screen_width, config.screen_height)
+    image bathroom = im.Scale('pic/locations/home/3.jpg', config.screen_width, config.screen_height)
+    image kitchen = im.Scale('pic/locations/home/4.jpg', config.screen_width, config.screen_height)
     image street = ConditionSwitch(
-        "hour >= 5 and hour <= 20", im.FactorScale("pic/locations/street/1.jpg",1.5),
-        "hour > 20 or hour < 5", im.FactorScale("pic/locations/street/2.jpg",1.5),
+        "hour >= 5 and hour <= 20", im.Scale("pic/locations/street/1.jpg",config.screen_width, config.screen_height),
+        "hour > 20 or hour < 5", im.Scale("pic/locations/street/2.jpg",config.screen_width, config.screen_height),
         )
     image beach = ConditionSwitch(
-        "hour >= 5 and hour <= 20", im.FactorScale("pic/locations/beach/1.jpg",1.5),
-        "hour > 20 or hour < 5", im.FactorScale("pic/locations/beach/2.jpg",1.5),
+        "hour >= 5 and hour <= 20", im.Scale("pic/locations/beach/1.jpg",config.screen_width, config.screen_height),
+        "hour > 20 or hour < 5", im.Scale("pic/locations/beach/2.jpg",config.screen_width, config.screen_height),
         )
     image beachChange = ConditionSwitch(
-        "hour >= 5 and hour <= 20", im.FactorScale("pic/locations/beach/changeRoom/1.jpg",1.5),
-        "hour > 20 or hour < 5", im.FactorScale("pic/locations/beach/changeRoom/2.jpg",1.5),
+        "hour >= 5 and hour <= 20", im.Scale("pic/locations/beach/changeRoom/1.jpg",config.screen_width, config.screen_height),
+        "hour > 20 or hour < 5", im.Scale("pic/locations/beach/changeRoom/2.jpg",config.screen_width, config.screen_height),
         )
     image shopStreet = ConditionSwitch(
-        "hour >= 5 and hour <= 20", im.FactorScale("pic/locations/shopStreet/1.jpg",1.5),
-        "hour > 20 or hour < 5", im.FactorScale("pic/locations/shopStreet/2.jpg",1.5),
+        "hour >= 5 and hour <= 20", im.Scale("pic/locations/shopStreet/1.jpg",config.screen_width, config.screen_height),
+        "hour > 20 or hour < 5", im.Scale("pic/locations/shopStreet/2.jpg",config.screen_width, config.screen_height),
         )
-    image shop = im.FactorScale('pic/locations/shop/1.jpg', 1.5)
-    image shopBeauty = im.FactorScale('pic/locations/shopBeauty/1.jpg', 1.5)
-    image sexShop = im.FactorScale('pic/locations/sexShop/1.jpg', 1.3)
+    image shop = im.Scale('pic/locations/shop/1.jpg', config.screen_width, config.screen_height)
+    image shopBeauty = im.Scale('pic/locations/shopBeauty/1.jpg', config.screen_width, config.screen_height)
+    image sexShop = im.Scale('pic/locations/sexShop/1.jpg', config.screen_width, config.screen_height)
     image hall = ConditionSwitch(
-        "hour >= 5 and hour <= 20", im.FactorScale("pic/locations/school/hall/1.jpg",1.5),
-        "hour > 20 or hour < 5", im.FactorScale("pic/locations/school/hall/2.jpg",1.5),
+        "hour >= 5 and hour <= 20", im.Scale("pic/locations/school/hall/1.jpg",config.screen_width, config.screen_height),
+        "hour > 20 or hour < 5", im.Scale("pic/locations/school/hall/2.jpg",config.screen_width, config.screen_height),
         )
     image entrance = ConditionSwitch(
-        "hour >= 5 and hour <= 20", im.FactorScale("pic/locations/school/entrance/1.jpg",1.5),
-        "hour > 20 or hour < 5", im.FactorScale("pic/locations/school/entrance/2.jpg",1.5),
+        "hour >= 5 and hour <= 20", im.Scale("pic/locations/school/entrance/1.jpg",config.screen_width, config.screen_height),
+        "hour > 20 or hour < 5", im.Scale("pic/locations/school/entrance/2.jpg",config.screen_width, config.screen_height),
         )
     image library = ConditionSwitch(
-        "hour >= 5 and hour <= 20", im.FactorScale("pic/locations/school/library/1.jpg",1.5),
-        "hour > 20 or hour < 5", im.FactorScale("pic/locations/school/library/2.jpg",1.5),
+        "hour >= 5 and hour <= 20", im.Scale("pic/locations/school/library/1.jpg",config.screen_width, config.screen_height),
+        "hour > 20 or hour < 5", im.Scale("pic/locations/school/library/2.jpg",config.screen_width, config.screen_height),
         )
     image pool = ConditionSwitch(
-        "hour >= 5 and hour <= 20", im.FactorScale("pic/locations/school/pool/1.jpg",1.5),
-        "hour > 20 or hour < 5", im.FactorScale("pic/locations/school/pool/2.jpg",1.5),
+        "hour >= 5 and hour <= 20", im.Scale("pic/locations/school/pool/1.jpg",config.screen_width, config.screen_height),
+        "hour > 20 or hour < 5", im.Scale("pic/locations/school/pool/2.jpg",config.screen_width, config.screen_height),
         )
     image gym = ConditionSwitch(
-        "hour >= 5 and hour <= 20", im.FactorScale("pic/locations/school/gym/1.jpg",1.5),
-        "hour > 20 or hour < 5", im.FactorScale("pic/locations/school/gym/2.jpg",1.5),
+        "hour >= 5 and hour <= 20", im.Scale("pic/locations/school/gym/1.jpg",config.screen_width, config.screen_height),
+        "hour > 20 or hour < 5", im.Scale("pic/locations/school/gym/2.jpg",config.screen_width, config.screen_height),
         )
-    image changeRoom = im.FactorScale('pic/locations/school/changeRoom/1.png', 1.5)
-    image storage = im.FactorScale('pic/locations/school/storage/1.jpg', 1.5)
+    image changeRoom = im.Scale('pic/locations/school/changeRoom/1.png', config.screen_width, config.screen_height)
+    image storage = im.Scale('pic/locations/school/storage/1.jpg', config.screen_width, config.screen_height)
     image firstFloor = ConditionSwitch(
-        "hour >= 5 and hour < 9", im.FactorScale("pic/locations/school/firstFloor/1.jpg",1.5),
-        "hour >= 9 and hour <= 20", im.FactorScale("pic/locations/school/firstFloor/2.jpg",1.5),
-        "hour > 20 or hour < 5", im.FactorScale("pic/locations/school/firstFloor/3.jpg",1.5),
+        "hour >= 5 and hour < 9", im.Scale("pic/locations/school/firstFloor/1.jpg",config.screen_width, config.screen_height),
+        "hour >= 9 and hour <= 20", im.Scale("pic/locations/school/firstFloor/2.jpg",config.screen_width, config.screen_height),
+        "hour > 20 or hour < 5", im.Scale("pic/locations/school/firstFloor/3.jpg",config.screen_width, config.screen_height),
         )
     image office = ConditionSwitch(
-        "hour >= 5 and hour <= 20", im.FactorScale("pic/locations/school/office/1.jpg",1.5),
-        "hour > 20 or hour < 5", im.FactorScale("pic/locations/school/office/2.jpg",1.5),
+        "hour >= 5 and hour <= 20", im.Scale("pic/locations/school/office/1.jpg",config.screen_width, config.screen_height),
+        "hour > 20 or hour < 5", im.Scale("pic/locations/school/office/2.jpg",config.screen_width, config.screen_height),
         )
     image class1 = ConditionSwitch(
-        "hour >= 5 and hour <= 20", im.FactorScale("pic/locations/school/class1/1.jpg",1.5),
-        "hour > 20 or hour < 5", im.FactorScale("pic/locations/school/class1/2.jpg",1.5),
+        "hour >= 5 and hour <= 20", im.Scale("pic/locations/school/class1/1.jpg",config.screen_width, config.screen_height),
+        "hour > 20 or hour < 5", im.Scale("pic/locations/school/class1/2.jpg",config.screen_width, config.screen_height),
         )
     image class2 = ConditionSwitch(
-        "hour >= 5 and hour <= 20", im.FactorScale("pic/locations/school/class2/1.jpg",1.5),
-        "hour > 20 or hour < 5", im.FactorScale("pic/locations/school/class2/2.jpg",1.5),
+        "hour >= 5 and hour <= 20", im.Scale("pic/locations/school/class2/1.jpg",config.screen_width, config.screen_height),
+        "hour > 20 or hour < 5", im.Scale("pic/locations/school/class2/2.jpg",config.screen_width, config.screen_height),
         )
     image class3 = ConditionSwitch(
-        "hour >= 5 and hour <= 20", im.FactorScale("pic/locations/school/class3/1.jpg",1.5),
-        "hour > 20 or hour < 5", im.FactorScale("pic/locations/school/class3/2.jpg",1.5),
+        "hour >= 5 and hour <= 20", im.Scale("pic/locations/school/class3/1.jpg",config.screen_width, config.screen_height),
+        "hour > 20 or hour < 5", im.Scale("pic/locations/school/class3/2.jpg",config.screen_width, config.screen_height),
         )
     image class4 = ConditionSwitch(
-        "hour >= 5 and hour <= 20", im.FactorScale("pic/locations/school/class4/1.jpg",1.5),
-        "hour > 20 or hour < 5", im.FactorScale("pic/locations/school/class4/2.jpg",1.5),
+        "hour >= 5 and hour <= 20", im.Scale("pic/locations/school/class4/1.jpg",config.screen_width, config.screen_height),
+        "hour > 20 or hour < 5", im.Scale("pic/locations/school/class4/2.jpg",config.screen_width, config.screen_height),
         )
     image class5 = ConditionSwitch(
-        "hour >= 5 and hour <= 20", im.FactorScale("pic/locations/school/class5/1.jpg",1.5),
-        "hour > 20 or hour < 5", im.FactorScale("pic/locations/school/class5/2.jpg",1.5),
+        "hour >= 5 and hour <= 20", im.Scale("pic/locations/school/class5/1.jpg",config.screen_width, config.screen_height),
+        "hour > 20 or hour < 5", im.Scale("pic/locations/school/class5/2.jpg",config.screen_width, config.screen_height),
         )
     image secondFloor = ConditionSwitch(
-        "hour >= 5 and hour < 9", im.FactorScale("pic/locations/school/secondFloor/1.jpg",1.5),
-        "hour >= 9 and hour <= 20", im.FactorScale("pic/locations/school/secondFloor/2.jpg",1.5),
-        "hour > 20 or hour < 5", im.FactorScale("pic/locations/school/secondFloor/3.jpg",1.5),
+        "hour >= 5 and hour < 9", im.Scale("pic/locations/school/secondFloor/1.jpg",config.screen_width, config.screen_height),
+        "hour >= 9 and hour <= 20", im.Scale("pic/locations/school/secondFloor/2.jpg",config.screen_width, config.screen_height),
+        "hour > 20 or hour < 5", im.Scale("pic/locations/school/secondFloor/3.jpg",config.screen_width, config.screen_height),
         )
     image teacherRoom = ConditionSwitch(
-        "hour >= 5 and hour <= 20", im.FactorScale("pic/locations/school/teacherRoom/1.jpg",1.5),
-        "hour > 20 or hour < 5", im.FactorScale("pic/locations/school/teacherRoom/2.jpg",1.5),
+        "hour >= 5 and hour <= 20", im.Scale("pic/locations/school/teacherRoom/1.jpg",config.screen_width, config.screen_height),
+        "hour > 20 or hour < 5", im.Scale("pic/locations/school/teacherRoom/2.jpg",config.screen_width, config.screen_height),
         )
-    image wcm =  im.FactorScale('pic/locations/school/secondFloor/wcm.jpg', 1.5)
-    image wcf =  im.FactorScale('pic/locations/school/secondFloor/wcf.jpg', 1.5)
+    image wcm =  im.Scale('pic/locations/school/secondFloor/wcm.jpg', config.screen_width, config.screen_height)
+    image wcf =  im.Scale('pic/locations/school/secondFloor/wcf.jpg', config.screen_width, config.screen_height)
     
 #Для теста
 label test:
@@ -204,13 +204,13 @@ label test:
 # Home
 ##############################################################
 label loc_home:
-    show expression im.FactorScale('pic/locations/home/1.jpg', 1.5) at left as home
+    show expression im.Scale('pic/locations/home/1.jpg', config.screen_width, config.screen_height) at left as home
     screen home:
         fixed:
             text 'Ваша маленькая квартира в этом миленьком городке. В центре комнаты стоит небольшой стеклянный столик, у стены вольготно расположилась полка с любимыми игрушками, которые Вы коллекционировали всю жизнь. Отсюда можно пойти в спальню или, если есть необходимость, в ванную. Слева выход в небольшую кухню.' xalign 0.0 yalign 1.0 style style.description
-            textbutton 'Кухня' xalign 0.05 yalign 0.4 action Function(move, 'loc_kitchen') style "navigation_button" text_style "navigation_button_text"
-            textbutton 'Спальня' xalign 0.05 yalign 0.5 action Function(move, 'loc_bedroom') style "navigation_button" text_style "navigation_button_text"
-            textbutton 'Ванная' xalign 0.45 yalign 0.3 action Function(move, 'loc_bathroom') style "navigation_button" text_style "navigation_button_text"
+            textbutton 'Кухня' xalign 0.05 yalign 0.5 action Function(move, 'loc_kitchen') style "navigation_button" text_style "navigation_button_text"
+            textbutton 'Спальня' xalign 0.05 yalign 0.7 action Function(move, 'loc_bedroom') style "navigation_button" text_style "navigation_button_text"
+            textbutton 'Ванная' xalign 0.48 yalign 0.4 action Function(move, 'loc_bathroom') style "navigation_button" text_style "navigation_button_text"
             textbutton 'Улица' xalign 0.7 yalign 0.85 action Function(move, 'loc_street') style "navigation_button" text_style "navigation_button_text"
             textbutton 'Test' xalign 0.0 yalign 0.2 action Function(move,'test') style "navigation_button" text_style "navigation_button_text"
     call screen home
@@ -222,7 +222,7 @@ label loc_home:
                 text 'Уютненькая маленькая спальня. Слева находится небольшой шкаф, в котором висит ваша повседневная одежда. Справа кровать, довольно удобная. Тут ещё есть телевизор, но он не работает, так что совсем не будет мешать Вам отходить ко сну.' xalign 0.0 yalign 1.0 style style.description
                 textbutton 'Гостинная' xalign 0.5 yalign 0.8 action Function(move, 'loc_home') style "navigation_button" text_style "navigation_button_text"
                 if (ptime - last_sleeped >= 4) or (player.energy < player.health/4):
-                    textbutton 'Спать' xalign 0.85 yalign 0.7 action Jump('sleep') style "navigation_button" text_style "navigation_button_text"
+                    textbutton 'Спать' xalign 0.85 yalign 0.76 action Jump('sleep')
         call screen bedroom
         
         
@@ -230,8 +230,22 @@ label loc_home:
         show kitchen at left
         screen kitchen:
             fixed:
-                text 'Микроволновка, плита, раковина, шкафчики. Кухня одним словом. \nОценив количество оставшейся еды, Вы прикидываете, что её хватит ещё на несколько раз.' xalign 0.0 yalign 1.0 style style.description
+                if player.hasItem('Сырая еда'):
+                    $ temp = player.getItem('Сырая еда').durability
+                    text 'Микроволновка, плита, раковина, шкафчики. Кухня одним словом. \nОценив количество оставшейся еды, Вы прикидываете, что её хватит ещё на [temp] раз.' xalign 0.0 yalign 1.0 style style.description
+                    textbutton 'Поесть' xalign 0.4 yalign 0.6 action [
+                    Function(player.eat, player.getItem('Сырая еда')),
+                    Function(changetime, 15),
+                    Function(move, curloc)]
+                else :
+                    text 'Микроволновка, плита, раковина, шкафчики. Кухня одним словом. \nОценив количество оставшейся еды, Вы понимаете, что её не осталось СОВСЕМ. Надо срочно сгонять в магазин.' xalign 0.0 yalign 1.0 style style.description
                 textbutton 'Гостинная' xalign 0.5 yalign 0.8 action Function(move, 'loc_home') style "navigation_button" text_style "navigation_button_text"
+                if player.hasItem('Сэндвич') == False and player.hasItem('Сырая еда') == True:
+                    textbutton 'Сделать\nсэндвич' xalign 0.8 yalign 0.65 action [
+                    Function(player.addItems, 'Сэндвич'),
+                    Function(player.apply, 'Сырая еда'),
+                    Function(changetime, 15),
+                    Jump(curloc)]
                 
         call screen kitchen
         
@@ -242,7 +256,7 @@ label loc_home:
             fixed:
                 text 'Ванная комната. Совмещённая. В лучших традициях далёкой страны. Тут можно искупаться, чтобы смыть с себя грязь и прочие человеческие нечистоты. А можно просто постоять под душем и отдохнуть.' xalign 0.0 yalign 1.0 style style.description
                 textbutton 'Гостинная' xalign 0.5 yalign 0.8 action Function(move, 'loc_home') style "navigation_button" text_style "navigation_button_text"
-                textbutton 'Душ' xalign 0.4 yalign 0.2 action Jump('shower') style "navigation_button" text_style "navigation_button_text"
+                textbutton 'Душ' xalign 0.4 yalign 0.3 action Jump('shower') style "navigation_button" text_style "navigation_button_text"
                 
         call screen bathroom
         
@@ -466,9 +480,9 @@ label loc_street:
                      text 'Посмотрев вдоль, Вы видите пару бегущих людей. Действительно, улица чрезвычайно удобна для пробежек.' style style.description
                 else:
                      text 'Посмотрев вдоль, Вы больше не видите бегущих людей. Наверное убежали. Или же просто ночь наступила?' style style.description
-            textbutton 'Домой' xalign 0.2 yalign 0.3 action Function(move, 'loc_home') style "navigation_button" text_style "navigation_button_text"
-            textbutton 'Пляж' xalign 0.7 yalign 0.8 action [Function(changetime, 30),Function(move, 'loc_beach')] style "navigation_button" text_style "navigation_button_text"
-            textbutton 'Торговая улица' xalign 0.35 yalign 0.3 action [Function(changetime, 15),Function(move, 'loc_shopStreet')] style "navigation_button" text_style "navigation_button_text"
+            textbutton 'Домой' xalign 0.2 yalign 0.4 action Function(move, 'loc_home') style "navigation_button" text_style "navigation_button_text"
+            textbutton 'На пляж' xalign 0.1 yalign 0.8 action [Function(changetime, 30),Function(move, 'loc_beach')] style "navigation_button" text_style "navigation_button_text"
+            textbutton 'Торговая\nулица' xalign 0.4 yalign 0.4 action [Function(changetime, 15),Function(move, 'loc_shopStreet')] style "navigation_button" text_style "navigation_button_text"
             textbutton 'Школа' xalign 0.5 yalign 0.8 action [Function(changetime, 30),Function(move, 'loc_entrance')] style "navigation_button" text_style "navigation_button_text"
     call screen street
     
@@ -479,7 +493,7 @@ label loc_street:
                 vbox xalign 0.0 yalign 1.0:
                     text 'Пляж, просто пляж. На нём можно неплохо загореть, если уделить этому недельку времени, или же просто искупаться.' style style.description
                 textbutton 'К дому' xalign 0.5 yalign 0.8 action [Function(changetime, 30),Function(move, 'loc_street')] style "navigation_button" text_style "navigation_button_text"
-                textbutton 'Раздевалка' xalign 0.7 yalign 0.45 action Function(move, 'loc_beachChange') style "navigation_button" text_style "navigation_button_text"
+                textbutton 'Раздевалка' xalign 0.8 yalign 0.55 action Function(move, 'loc_beachChange') style "navigation_button" text_style "navigation_button_text"
         call screen beach
         
         label loc_beachChange:
@@ -516,6 +530,7 @@ label loc_street:
                     vbox xalign 0.0 yalign 1.0:
                         text 'Круглосуточный магазин, единственный в Вашем районе. После прогулки в нем Вы сможете без промедления набрать еды на кухню, выбрать себе напитки напитки и некоторые иные вещи.' style style.description
                     textbutton 'Назад' xalign 0.5 yalign 0.8 action [Function(move, 'loc_shopStreet')] style "navigation_button" text_style "navigation_button_text"
+                    textbutton 'Закупиться' xalign 0.3 yalign 0.5 action [Hide('stats_screen'),Show('shopping')]
             call screen shop
             
             

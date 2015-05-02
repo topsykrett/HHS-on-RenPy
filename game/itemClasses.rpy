@@ -23,3 +23,7 @@ init -50 python:
             self.soze = size
             self.corr = corr
             self.lust = lust          
+
+    class Food(Item):
+        def __init__ (self, energy):
+            self.energy = energy

@@ -40,8 +40,8 @@ init -1 python hide:
     ## Функция темы берет несколько параметров, которые
     ## настраивают цветовую схему.
 
-    theme.marker(
-        ## Theme: Marker
+    theme.bordered(
+        ## Theme: Bordered
         ## Color scheme: Basic Blue
 
         ## The color of an idle widget face.
@@ -72,6 +72,7 @@ init -1 python hide:
         ## The background of the main menu. This can be a color
         ## beginning with '#', or an image filename. The latter
         ## should take up the full height and width of the screen.
+        #mm_root = "pic/new.png",
         mm_root = "#dcebff",
 
         ## The background of the game menu. This can be a color

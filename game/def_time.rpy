@@ -51,9 +51,9 @@ init -3 python:
             minute -= 60
             hour += 1
             ptime += 1
-            if hour == 0: dailyRecount()
             if hour >= 24:
                 hour -= 24
+                dailyRecount(allChars)
                 weekday += 1
                 if weekday >=8: weekday -=7
                 number += 1

@@ -1,6 +1,7 @@
 init python:
     style.my_text = Style(style.default)
     style.warning = Style(style.default)
+    style.green = Style(style.default)
     style.description = Style(style.default)
     style.myBox = Style(style.default)
     style.navigation_button = Style(style.button_text)
@@ -20,7 +21,12 @@ style warning is text:
     size 15
     outlines [(1, "#000000", 0, 0)]
     color "#FF1E1E"
-    
+
+style green is text:
+    size 15
+    outlines [(1, "#000000", 0, 0)]
+    color "#00FF00"
+
 style description is text:
     outlines [(2, "#000000", 0, 0)]
 

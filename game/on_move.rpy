@@ -12,13 +12,14 @@ init python:
     def move(where):
         global curloc, hour, prevloc, same_loc #объявление глобальных переменных
         if renpy.has_label(where) == True: #Проверка на то, что локация существует. Если нет, прыгаем домой.
-            renpy.scene() #Сброс окна
+            renpy.scene(layer='master') # Сброс картинок
+            renpy.scene(layer='screens') # Сброс скринов
             renpy.show('daytime')
             if getLoc(curloc) != False: getLoc(curloc).people = [] #Сброс людей с предыдущей локации
 
             player.energy -= randf(2,5) #расход энергии
             resetStats(allChars) #Сброс статов
-
+            player.checkDur() # Удаление использованных предметов
             changetime(rand(2, 5)) #изменение времени
 
             if where[:4] == 'loc_' and getLoc(where).position != 'tech': #Если локация - локация и если она не техническая
