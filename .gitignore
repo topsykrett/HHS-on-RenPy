@@ -54,3 +54,8 @@ game/saves/persistent
 game/saves/persistent
 *.txt
 tmp/navigation.json
+*.json
+traceback.txt
+*.bak
+log.txt
+*.json
