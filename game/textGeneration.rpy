@@ -109,12 +109,26 @@ init python:
             elif char.rep < 80: description += 'родители ставят Вас в пример своим детям.'
             else : description += 'родители в восторге от вас.'
         
+        if char.sex != 'female' and char.corr > 50:
+            description += '\n[char.name] прозрачно намекает вам, что под одеждой от вас скрывается [char.psize] сантиметровый змий!'
         
+        if char.sex == 'female':
+            description += '\nНа ней сегодня '
+        else:
+            description += '\nНа нём сегодня '
+        if char.wear == []:
+            description += 'ничего нет.'
+        else:
+            counter = 0
+            for x in char.wear:
+                counter += 1
+                description += '[x.name]'
+                if counter < len(char.wear):
+                    description += ', '
+                else:
+                    description += '.'
         return description
         
-# self.psize = psize
-# self.vsize = vsize
-# self.asize = asize
 # self.inventory = inventory
 # self.wear = wear
 # self.will = will

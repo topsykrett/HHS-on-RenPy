@@ -54,3 +54,6 @@ log.txt
 *.gif
 *.pdn
 *.jpeg
+*.crdownload
+*.bak
+log.txt
