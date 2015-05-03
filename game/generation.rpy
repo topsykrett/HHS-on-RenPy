@@ -229,7 +229,8 @@ label skipall:
             rep = 0,
             body = genBody()
             )
-        player.addItems('Салфетка', 'Сырая еда')
+        player.addItems('Салфетка', 'Сырая еда', jaket.name, longSkirt.name, browntights.name, simpleUnderwear.name)
+        player.say = Character (player.name, kind=adv, dynamic = False, color = player.color, show_side_image = Image(player.picto, xalign=0.0, yalign=1.0, yanchor="center"), window_left_padding = 170)
 #####################################################
 #Генерация и создание студентов
 #####################################################

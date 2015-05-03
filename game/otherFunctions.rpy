@@ -132,7 +132,8 @@ init -5 python:
                         tempChar = x
                 return tempChar
                 
-                
+    def clrscr():
+        renpy.scene(layer='screens')
                 
     def skipEvent():
         tryEvent(curloc)

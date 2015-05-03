@@ -62,19 +62,16 @@ init -20 python:
                     self.inventory.append(temp)
                     flag = True
             return flag
-
-        def removeItem(self,*args):
-            flag = 0
-            for x in args:
-                for y in self.inventory:
-                    if x == y.name:
-                        self.inventory.remove(y)
-                        flag += 1
-            if flag == len(args):
-                return True
-            else:
-                return False
+            
+# Удаление айтемов
+        def removeItem(self,item):
+            if self.inventory.count(item) > 0:
+                self.inventory.remove(item)
+            if self.wear.count(item) > 0:
+                self.wear.remove(item)
                 
+                
+# Удаление айтемов !!! Сносит ВСЕ с данным названием!!!
         def removeItems(self,*args):
             flag = 0
             for x in args:
@@ -82,17 +79,27 @@ init -20 python:
                     if x == y.name:
                         self.inventory.remove(y)
                         flag += 1
+            for x in args:
+                for y in self.wear:
+                    if x == y.name:
+                        self.wear.remove(y)
+                        flag += 1
             if flag == len(args):
                 return True
             else:
                 return False
                 
+# Проверка на наличие айтема
         def hasItem(self, name):
             for x in self.inventory:
                 if name == x.name:
                     return True
+            for x in self.wear:
+                if name == x.name:
+                    return True
             return False
             
+# Подсчёт айтемов
         def countItem(self, name):
             counter = 0
             for x in self.inventory:
@@ -100,18 +107,24 @@ init -20 python:
                     counter += 1
             return counter
             
+# Применение айтема
         def apply(self, name):
             for x in self.inventory:
                 if x.name == name:
                     x.durability -= 1
                     self.checkDur()
                     return
-                
+                    
+# Удаление всех использованных айтемов
         def checkDur(self):
             for x in self.inventory:
                 if x.durability <= 0:
                     self.inventory.remove(x)
+            for x in self.wear:
+                if x.durability <= 0:
+                    self.wear.remove(x)
                     
+# Функция еды
         def eat(self, food):
             global last_eat
             if food.name == 'Энергетик':
@@ -164,6 +177,7 @@ init -20 python:
                 for y in self.body:
                     if x == y.name:
                         y.sperm = True
+                        
 #Помыться
         def cleanAll(self):
             self.dirty = 0
@@ -196,6 +210,9 @@ init -20 python:
             for x in self.inventory:
                 if x.name == name:
                     return x
+            for x in self.wear:
+                if x.name == name:
+                    return x
 
 #Сброс переменных
         def reset(self):
@@ -215,10 +232,42 @@ init -20 python:
             self.beauty = min(max(self.beauty,0),200)
             self.dirty = min(max(self.dirty,0),30)
             self.rep = min(max(self.rep,0),100)
-        
+            
+# Увеличение развратности
         def setCorr(self,amount):
             self.corr += amount
 
+# Функция одевания
+        def wearing(self, cloth):
+            if cloth.corr > self.corr or cloth.sex != self.sex:
+                return False
+            for weared in self.wear:
+                for cov in weared.cover:
+                    if cloth.cover.count(cov) > 0 or cloth.cover[0] == 'all':
+                        self.wear.remove(weared)
+                        self.inventory.append(weared)
+            if rand(1,100) > 90:
+                cloth.durability -= 1
+            self.inventory.remove(cloth)
+            self.wear.append(cloth)
+            self.checkDur()
+
+# Функция частичного раздевания
+        def dewearing(self,cloth):
+            if self.wear.count(cloth) > 0:
+                self.wear.remove(cloth)
+                self.inventory.append(cloth)
+            else:
+                return False
+            
+# Функция полного раздевания
+        def undress(self):
+            self.inventory.extend(self.wear)
+            self.wear = []
+
+            
+            
+            
 ###################################################################
 #Класс частей тела
 ###################################################################

@@ -11,7 +11,7 @@ init python:
             if char.sex == 'male':
                 description += 'высокий '
             else :
-                description += 'высокая'
+                description += 'высокая '
         
         if char.age > 20:
             if char.sex == 'male': description += 'мужчина'

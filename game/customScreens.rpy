@@ -178,15 +178,40 @@ screen inventory:
     fixed :
         add 'pic/bg.png'
     fixed xpos 0.01 ypos 0.01:
-        textbutton 'Назад' action Function(move, curloc)
-        
+        hbox :
+            textbutton 'Назад' action Function(move, curloc)
+            textbutton 'Одежда' action [Hide('inventory'),Hide('showItem'),Show('inventory_clothing')]
+            
         $ xalig = 0.2
         $ yalig = 0.05
         for x in player.inventory:
             if x.type == 'food':
                 imagebutton idle im.FactorScale(x.picto,0.4) hover im.FactorScale(x.picto,0.45) xalign xalig yalign yalig  action [Function(player.eat, x), Function(move,curloc)] hovered [SetVariable('myItem', x), Show('showItem')]
-            elif x.type != 'hidden':
+            elif x.type == 'tool':
                 imagebutton idle im.FactorScale(x.picto,0.4) hover im.FactorScale(x.picto,0.45) xalign xalig yalign yalig  action NullAction() hovered [SetVariable('myItem', x), Show('showItem')]
+            else:
+                $ xalig -= 0.09
+            $ xalig += 0.09
+            if xalig >= 0.99:
+                $ yalig += 0.15
+                $ xalig = 0.2
+
+screen inventory_clothing:
+    zorder 1
+    modal True
+    fixed :
+        add 'pic/bg.png'
+    fixed xpos 0.01 ypos 0.01:
+        hbox :
+            textbutton 'Назад' action Function(move, curloc)
+            textbutton 'Разное' action [Hide('inventory_clothing'),Hide('showItem'),Show('inventory')]
+            
+        $ xalig = 0.2
+        $ yalig = 0.05
+        for x in player.inventory:
+            if x.type == 'clothing':
+                imagebutton idle im.FactorScale(x.picto,0.4) hover im.FactorScale(x.picto,0.45) xalign xalig yalign yalig  action NullAction() hovered [SetVariable('myItem', x), Show('showItem')]
+            else :
                 $ xalig -= 0.09
             $ xalig += 0.09
             if xalig >= 0.99:
@@ -200,9 +225,15 @@ screen showItem:
             add myItem.picto
             null height 10
             text '[myItem.name]' style style.my_text
-            text 'Использований [myItem.durability]' style style.my_text
+            text _('Использований [myItem.durability]') style style.my_text
             if myItem.type == 'food':
-                text 'Насыщение [myItem.energy]' style style.my_text
+                text _('Насыщение [myItem.energy]') style style.my_text
+            if myItem.type == 'clothing':
+                text _('Требует развратности [myItem.corr]') style style.my_text
+                text _('Сексуальность [myItem.lust]') style style.my_text
+                text _('Репутация [myItem.reputation]') style style.my_text
+            if player.hasItem(myItem.name):
+                textbutton _('Выбросить') action [Function(player.removeItem, myItem), Hide ('showItem')]
                 
    
 screen shopping:
@@ -210,13 +241,25 @@ screen shopping:
     modal True
     fixed :
         add 'pic/bg.png'
+    frame :
+        xalign 1.0
+        text 'Денег - [player.money]'
     fixed xpos 0.01 ypos 0.01:
         textbutton 'Назад' action Function(move, curloc)
         hbox xpos 0.2 ypos 0.1:
-            vbox :
-                textbutton napkin.name action [Function(player.buy, napkin), Show('showSellItem')] hovered [SetVariable('myItem', napkin), Show('showSellItem')]
-                textbutton eDrink.name action [Function(player.buy, eDrink, 'add'), Show('showSellItem')] hovered [SetVariable('myItem', eDrink), Show('showSellItem')]
-                textbutton rawFood.name action [Function(player.buy, rawFood), Show('showSellItem')] hovered [SetVariable('myItem', rawFood), Show('showSellItem')]
+            frame :
+                vbox :
+                    text 'Разное'
+                    textbutton napkin.name action [Function(player.buy, napkin), Show('showSellItem')] hovered [SetVariable('myItem', napkin), Show('showSellItem')]
+                    textbutton eDrink.name action [Function(player.buy, eDrink), Show('showSellItem')] hovered [SetVariable('myItem', eDrink), Show('showSellItem')]
+                    textbutton rawFood.name action [Function(player.buy, rawFood), Show('showSellItem')] hovered [SetVariable('myItem', rawFood), Show('showSellItem')]
+            frame :
+                vbox :
+                    text 'Одежда'
+                    textbutton jaket.name action [Function(player.buy, jaket, 'add'), Show('showSellItem')] hovered [SetVariable('myItem', jaket), Show('showSellItem')]
+                    textbutton longSkirt.name action [Function(player.buy, longSkirt, 'add'), Show('showSellItem')] hovered [SetVariable('myItem', longSkirt), Show('showSellItem')]
+                    textbutton browntights.name action [Function(player.buy, browntights, 'add'), Show('showSellItem')] hovered [SetVariable('myItem', browntights), Show('showSellItem')]
+                    textbutton simpleUnderwear.name action [Function(player.buy, simpleUnderwear, 'add'), Show('showSellItem')] hovered [SetVariable('myItem', simpleUnderwear), Show('showSellItem')]
                     
 screen showSellItem:
     zorder 1
@@ -239,3 +282,35 @@ screen showSellItem:
                 text 'В наличии [temp_c] шт.' style style.my_text
                 text 'Использований - [temp_d]' style style.my_text
             
+screen wardrobe:
+    zorder 1
+    modal True
+    fixed :
+        add 'pic/bg.png'
+        add 'pic/events/various/undress.png' at Move((0.0, 0.8), (0.8, 1.0), 1.0, xanchor="center", yanchor="center")
+        
+    fixed xpos 0.01 ypos 0.01:
+        textbutton 'Назад' action Function(move, curloc)
+        $ xalig = 0.2
+        $ yalig = 0.05
+        for x in player.inventory:
+            if x.type == 'clothing':
+                imagebutton idle im.FactorScale(x.picto,0.4) hover im.FactorScale(x.picto,0.45) xalign xalig yalign yalig  action [Function(player.wearing,x),Show('wardrobe')] hovered [SetVariable('myItem', x), Show('showItem')]
+            else :
+                $ xalig -= 0.09
+            $ xalig += 0.09
+            if xalig >= 0.7 :
+                $ yalig += 0.15
+                $ xalig = 0.2
+
+    fixed xpos 0.7 ypos 0.01 :
+        frame :
+            vbox :
+                text 'На вас надето:'
+                if len(player.wear) == 0:
+                    text 'Ничего'
+                else :
+                    for x in player.wear:
+                        textbutton x.name action [Function( player.dewearing, x ), Show ('wardrobe')] hovered [SetVariable('myItem', x), Show('showItem')]
+                    textbutton _('Раздеться') action [Function( player.undress ), Show ('wardrobe')] 
+        

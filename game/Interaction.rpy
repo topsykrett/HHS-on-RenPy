@@ -144,7 +144,7 @@ label speak:
     $ user = showHover
     $ changetime(10)
     $ player.energy -= rand(5,10)
-    $ user.loy += 100
+    $ user.loy += 0.5
     $ renpy.jump(dialogueSelector(user))
     
     call screen show_stat
