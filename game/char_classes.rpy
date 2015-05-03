@@ -190,7 +190,7 @@ init -20 python:
                 for y in self.body:
                     if x == y.name:
                         y.sperm = False
-
+# Функция покупки
         def buy(self, item, *args):
             if len(args) == 0:
                 if self.money >= item.cost:
@@ -205,7 +205,8 @@ init -20 python:
                     self.money -= item.cost
                     temp = copy.copy(item)
                     self.inventory.append(temp)
-        
+                    
+# Функция получения предмета по имени
         def getItem(self,name):
             for x in self.inventory:
                 if x.name == name:
@@ -241,11 +242,23 @@ init -20 python:
         def wearing(self, cloth):
             if cloth.corr > self.corr or cloth.sex != self.sex:
                 return False
-            for weared in self.wear:
-                for cov in weared.cover:
-                    if cloth.cover.count(cov) > 0 or cloth.cover[0] == 'all':
-                        self.wear.remove(weared)
-                        self.inventory.append(weared)
+            
+            for x in cloth.cover:
+                for y in self.wear:
+                    for z in y.cover:
+                        if x == z:
+                            self.wear.remove(y)
+                            self.inventory.append(y)
+                            break
+                
+            
+            # for item in self.wear:
+                # for cov in item.cover:
+                    # if cloth.cover.count(cov) > 0 or cloth.cover[0] == 'all':
+                        # self.wear.remove(item)
+                        # self.inventory.append(item)
+                        # break
+                        
             if rand(1,100) > 90:
                 cloth.durability -= 1
             self.inventory.remove(cloth)
@@ -265,9 +278,35 @@ init -20 python:
             self.inventory.extend(self.wear)
             self.wear = []
 
+# Возвращение всех прикрытых частей
+        def getCover(self):
+            temp = []
+            for x in self.wear:
+                temp.extend(x.cover)
+            return temp
             
+# Проверка на прикрытость
+        def isCover(self, *args):
+            temp = self.getCover()
+            counter = 0
+            for iscovered in args:
+                for covered in temp:
+                    if covered == iscovered:
+                        counter += 1
+                        break
+            if counter == len(args):
+                return True
+            else :
+                return False
             
-            
+# Проверка на определённый тип одежды
+        def getCovPurpose(self, purpose):
+            for x in self.wear:
+                if x.purpose == purpose:
+                    return True
+                else:
+                    return False
+                
 ###################################################################
 #Класс частей тела
 ###################################################################
@@ -293,6 +332,3 @@ init -20 python:
         for x in allChars:
             if x.name == name:
                 return x
-                
-                
-                

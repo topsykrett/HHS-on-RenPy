@@ -42,8 +42,9 @@ init python:
     corr = 0,
     reputation = 1,
     char = 'teacher',
-    sex = 'female')
-    jaket.cover = ['chest']
+    sex = 'female',
+    purpose = 'usual')
+    jaket.cover = ['верх']
     jaket.durability = 100
     jaket.name = _('Пиджак')
     jaket.cost = 1500
@@ -57,8 +58,9 @@ init python:
     corr = 0,
     reputation = 1,
     char = 'teacher',
-    sex = 'female')
-    longSkirt.cover = ['leg']
+    sex = 'female',
+    purpose = 'usual')
+    longSkirt.cover = ['низ']
     longSkirt.durability = 100
     longSkirt.name = _('Длинная юбка')
     longSkirt.cost = 1000
@@ -71,8 +73,9 @@ init python:
     corr = 0,
     reputation = 0,
     char = 'teacher',
-    sex = 'female')
-    browntights.cover = ['feet']
+    sex = 'female',
+    purpose = 'usual')
+    browntights.cover = ['ноги']
     browntights.durability = 10
     browntights.name = _('Телесные колготки')
     browntights.cost = 150
@@ -85,14 +88,60 @@ init python:
     corr = 0,
     reputation = 0,
     char = 'teacher',
-    sex = 'female')
-    simpleUnderwear.cover = ['under']
+    sex = 'female',
+    purpose = 'usual')
+    simpleUnderwear.cover = ['грудь','попа']
     simpleUnderwear.durability = 20
     simpleUnderwear.name = _('Простое нижнее бельё')
     simpleUnderwear.cost = 300
     simpleUnderwear.picto = 'pic/items/simpleUnderwear.png'
     simpleUnderwear.type = 'clothing'
     clothing.append(simpleUnderwear)
+
+    swimsuit = Clothing(
+    lust = 0,
+    corr = 0,
+    reputation = 0,
+    char = 'teacher',
+    sex = 'female',
+    purpose = 'swim')
+    swimsuit.cover = ['грудь','попа','верх','низ','ноги']
+    swimsuit.durability = 40
+    swimsuit.name = _('Купальник')
+    swimsuit.cost = 500
+    swimsuit.picto = 'pic/items/swimsuit.png'
+    swimsuit.type = 'clothing'
+    clothing.append(swimsuit)
+    
+    bikini_top = Clothing(
+    lust = 5,
+    corr = 30,
+    reputation = 0,
+    char = 'teacher',
+    sex = 'female',
+    purpose = 'swim')
+    bikini_top.cover = ['грудь','верх']
+    bikini_top.durability = 20
+    bikini_top.name = _('Бикини верх')
+    bikini_top.cost = 500
+    bikini_top.picto = 'pic/items/bikini_top.png'
+    bikini_top.type = 'clothing'
+    clothing.append(bikini_top)
+
+    bikini_bottom = Clothing(
+    lust = 5,
+    corr = 30,
+    reputation = 0,
+    char = 'teacher',
+    sex = 'female',
+    purpose = 'swim')
+    bikini_bottom.cover = ['попа','низ','ноги']
+    bikini_bottom.durability = 20
+    bikini_bottom.name = _('Бикини низ')
+    bikini_bottom.cost = 500
+    bikini_bottom.picto = 'pic/items/bikini_bottom.png'
+    bikini_bottom.type = 'clothing'
+    clothing.append(bikini_bottom)
     
     allItems.extend(clothing)
     

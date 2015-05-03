@@ -30,6 +30,7 @@ init python:
                     same_loc = 0
                 else:
                     same_loc = 1
+                checkClothes(curloc) # проверка одетости
 
             if rand(0,99) < 10 + (ptime - lastEventTime)*10 and where[:4] == 'loc_': tryEvent(where) # попытка дёрнуть рандомный эвент с локации. Чем больше прошло времени с последнего, тем выше шанс.
 
@@ -78,3 +79,17 @@ init python:
                 temp = getChar()
                 if location.people.count(temp) == 0:
                     location.people.append(temp)
+                    
+# Проверка одежды
+    def checkClothes(location):
+        location = getLoc(location)
+        if location.position != 'safe':
+            if player.isCover('верх','низ') == False and player.corr < 80:
+                renpy.scene(layer='screens')
+                renpy.jump('naked')
+            elif player.isCover('верх','низ') == False and player.corr >= 80 and location.id != 'loc_beach' and location.id != 'loc_pool':
+                renpy.scene(layer='screens')
+                renpy.jump('naked')
+            elif player.getCovPurpose('swim') and location.id != 'loc_beach' and location.id != 'loc_pool':
+                renpy.scene(layer='screens')
+                renpy.jump('naked')

@@ -12,13 +12,14 @@ init -50 python:
             self.purpose = purpose
             
     class Clothing(Item):
-        def __init__ (self, lust, corr, reputation, char, sex):
+        def __init__ (self, lust, corr, reputation, char, sex, purpose):
             self.cover = []
             self.lust = lust
             self.corr = corr
             self.reputation = reputation
             self.char = char
             self.sex = sex
+            self.purpose = purpose
     
     class Toy(Item):
         def __init__ (self, cover, size, corr, lust):

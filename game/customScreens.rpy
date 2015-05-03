@@ -229,7 +229,10 @@ screen showItem:
             if myItem.type == 'food':
                 text _('Насыщение [myItem.energy]') style style.my_text
             if myItem.type == 'clothing':
-                text _('Требует развратности [myItem.corr]') style style.my_text
+                if myItem.corr > player.corr:
+                    text _('Требует развратности [myItem.corr]') style style.warning
+                else :
+                    text _('Требует развратности [myItem.corr]') style style.my_text
                 text _('Сексуальность [myItem.lust]') style style.my_text
                 text _('Репутация [myItem.reputation]') style style.my_text
             if player.hasItem(myItem.name):
@@ -259,7 +262,10 @@ screen shopping:
                     textbutton jaket.name action [Function(player.buy, jaket, 'add'), Show('showSellItem')] hovered [SetVariable('myItem', jaket), Show('showSellItem')]
                     textbutton longSkirt.name action [Function(player.buy, longSkirt, 'add'), Show('showSellItem')] hovered [SetVariable('myItem', longSkirt), Show('showSellItem')]
                     textbutton browntights.name action [Function(player.buy, browntights, 'add'), Show('showSellItem')] hovered [SetVariable('myItem', browntights), Show('showSellItem')]
-                    textbutton simpleUnderwear.name action [Function(player.buy, simpleUnderwear, 'add'), Show('showSellItem')] hovered [SetVariable('myItem', simpleUnderwear), Show('showSellItem')]
+                    textbutton swimsuit.name action [Function(player.buy, swimsuit, 'add'), Show('showSellItem')] hovered [SetVariable('myItem', swimsuit), Show('showSellItem')]
+                    textbutton bikini_top.name action [Function(player.buy, bikini_top, 'add'), Show('showSellItem')] hovered [SetVariable('myItem', bikini_top), Show('showSellItem')]
+                    textbutton bikini_bottom.name action [Function(player.buy, bikini_bottom, 'add'), Show('showSellItem')] hovered [SetVariable('myItem', bikini_bottom), Show('showSellItem')]
+                    
                     
 screen showSellItem:
     zorder 1
@@ -271,11 +277,20 @@ screen showSellItem:
             text 'Использований [myItem.durability]' style style.my_text
             if myItem.type == 'food':
                 text 'Насыщение [myItem.energy]' style style.my_text
+                
+            if myItem.type == 'clothing':
+                if myItem.corr > player.corr:
+                    text _('Требует развратности [myItem.corr]') style style.warning
+                else :
+                    text _('Требует развратности [myItem.corr]') style style.my_text
+                text _('Сексуальность [myItem.lust]') style style.my_text
+                text _('Репутация [myItem.reputation]') style style.my_text
+                
             if myItem.cost > player.money:
                  text 'Цена - [myItem.cost]' style style.warning
             else :
                 text 'Цена - [myItem.cost]' style style.my_text
-                
+            
             if player.hasItem(myItem.name) > 0:
                 $ temp_d = player.getItem(myItem.name).durability
                 $ temp_c = player.countItem(myItem.name)
@@ -287,7 +302,7 @@ screen wardrobe:
     modal True
     fixed :
         add 'pic/bg.png'
-        add 'pic/events/various/undress.png' at Move((0.0, 0.8), (0.8, 1.0), 1.0, xanchor="center", yanchor="center")
+        add 'pic/events/various/undress.png' at Move((0.8, 2.0), (0.8, 0.8), 0.5, xanchor="center", yanchor="center")
         
     fixed xpos 0.01 ypos 0.01:
         textbutton 'Назад' action Function(move, curloc)

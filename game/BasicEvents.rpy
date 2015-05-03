@@ -202,3 +202,12 @@ label loc_dreams:
     'В это раз Вам ничего не снилось и, провалившись в ласковые объятия сна, Вы отлично выспались.'
     $ move('loc_bedroom')
     
+label naked:
+    if player.getCovPurpose('swim'):
+        show expression ("pic/events/various/bikini.png") at top
+    else:
+        show expression ("pic/events/various/naked.jpg") at top
+
+    player.say 'Я не могу выходить на улицу в таком виде!!!'
+    $ move(prevloc)
+    

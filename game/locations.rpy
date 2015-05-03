@@ -44,14 +44,14 @@ init 10 python:
     
     for x in _locs:
         if x[:4] == 'loc_':
-            if x == 'loc_home': loc = Location(id = x, name = 'дом', base_prob = 100, position = 'home')
-            elif x == 'loc_bedroom': loc = Location(id = x, name = 'спальня', base_prob = 0, position = 'home')
-            elif x == 'loc_bathroom': loc = Location(id = x, name = 'ванная', base_prob = 0, position = 'home')
-            elif x == 'loc_kitchen': loc = Location(id = x, name = 'кухня', base_prob = 0, position = 'home')
+            if x == 'loc_home': loc = Location(id = x, name = 'дом', base_prob = 100, position = 'safe')
+            elif x == 'loc_bedroom': loc = Location(id = x, name = 'спальня', base_prob = 0, position = 'safe')
+            elif x == 'loc_bathroom': loc = Location(id = x, name = 'ванная', base_prob = 0, position = 'safe')
+            elif x == 'loc_kitchen': loc = Location(id = x, name = 'кухня', base_prob = 0, position = 'safe')
             
             elif x == 'loc_street': loc = Location(id = x, name = 'улица', base_prob = 15, position = 'other')
             elif x == 'loc_beach': loc = Location(id = x, name = 'пляж', base_prob = 35, position = 'other')
-            elif x == 'loc_beachChange': loc = Location(id = x, name = 'раздевалка', base_prob = 0, position = 'other')
+            elif x == 'loc_beachChange': loc = Location(id = x, name = 'раздевалка', base_prob = 0, position = 'safe')
             elif x == 'loc_shopStreet': loc = Location(id = x, name = 'торговая улица', base_prob = 25, position = 'other')
             elif x == 'loc_shop': loc = Location(id = x, name = 'магазин', base_prob = 10, position = 'other')
             elif x == 'loc_shopBeauty': loc = Location(id = x, name = 'салон красоты', base_prob = 5, position = 'other')
@@ -60,7 +60,7 @@ init 10 python:
             elif x == 'loc_hall': loc = Location(id = x, name = 'холл', base_prob = 15, position = 'school')
             elif x == 'loc_entrance': loc = Location(id = x, name = 'вход', base_prob = 15, position = 'school')
             elif x == 'loc_library': loc = Location(id = x, name = 'библиотека', base_prob = 10, position = 'school')
-            elif x == 'loc_changeRoom': loc = Location(id = x, name = 'школьная раздевалка', base_prob = 5, position = 'school')
+            elif x == 'loc_changeRoom': loc = Location(id = x, name = 'школьная раздевалка', base_prob = 5, position = 'safe')
             elif x == 'loc_gym': loc = Location(id = x, name = 'спортивный зал', base_prob = 25, position = 'classroom')
             elif x == 'loc_pool': loc = Location(id = x, name = 'бассейн', base_prob = 15, position = 'classroom')
             elif x == 'loc_firstFloor': loc = Location(id = x, name = 'первый этаж', base_prob = 20, position = 'school')
@@ -505,6 +505,7 @@ label loc_street:
                     vbox xalign 0.0 yalign 1.0:
                         text 'Специально обустроенные комнатки для переодеваний. Внутри небольшая полочка для вещей, умывальник и полотенце. Очень удобно, хотя и необычно.' style style.description
                     textbutton 'Пляж' xalign 0.5 yalign 0.8 action Function(move, 'loc_beach') style "navigation_button" text_style "navigation_button_text"
+                    textbutton 'Переодеться' xalign 0.15 yalign 0.3 action Show('wardrobe')
             call screen beachChange
             
     
