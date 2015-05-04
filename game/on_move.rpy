@@ -6,7 +6,7 @@ init:
         "hour > 18  and hour <= 20", "#EB9191",
         )
     $ lastEventTime = 0
-    
+
 init python:
 #базовая функция перемещения. Использовать всегда и всюду
     def move(where):
@@ -17,7 +17,7 @@ init python:
             renpy.show('daytime')
             if getLoc(curloc) != False: getLoc(curloc).people = [] #Сброс людей с предыдущей локации
 
-            player.energy -= randf(2,5) #расход энергии
+            player.stats.energy -= randf(2,5) #расход энергии
             resetStats(allChars) #Сброс статов
             player.checkDur() # Удаление использованных предметов
             changetime(rand(2, 5)) #изменение времени
@@ -35,20 +35,20 @@ init python:
             if rand(0,99) < 10 + (ptime - lastEventTime)*10 and where[:4] == 'loc_': tryEvent(where) # попытка дёрнуть рандомный эвент с локации. Чем больше прошло времени с последнего, тем выше шанс.
 
             renpy.retain_after_load() # чтобы сохранялся интерфейс, иначе ошибка
-            
+
             renpy.show_screen('stats_screen') #При перемещении всегда появляется интерфейс
-            
+
             renpy.jump(where) #Переход на локу
         else:
             renpy.jump('loc_home')
-            
-#Просто дёргает всех людей и сбрасывает выделющиеся статы
-    def resetStats(input): 
-        for x in input:
-            x.reset()
-        player.reset()
 
-            
+#Просто дёргает всех людей и сбрасывает выделющиеся статы
+    def resetStats(input):
+        for x in input:
+            x.normalize()
+        player.normalize()
+
+
 #Вызов эвента
     def tryEvent(location):
         if getLoc(location).position == 'classroom' and lt() > 0: location += 'Learn' #Если сейчас уроки, то добавляем к поиску локаций Learn
@@ -70,7 +70,7 @@ init python:
             callEvent = tempEv[rands].id
             lastEventTime = ptime #запоминаем время
             renpy.jump(callEvent) #эвент
-                    
+
 #Добавление людей на локации
     def addPeopleLocation(location):
         location = getLoc(location) #Получение объекта локации
@@ -79,15 +79,15 @@ init python:
                 temp = getChar()
                 if location.people.count(temp) == 0:
                     location.people.append(temp)
-                    
+
 # Проверка одежды
     def checkClothes(location):
         location = getLoc(location)
         if location.position != 'safe':
-            if player.isCover('верх','низ') == False and player.corr < 80:
+            if player.isCover('верх','низ') == False and player.stats.corruption < 80:
                 renpy.scene(layer='screens')
                 renpy.jump('naked')
-            elif player.isCover('верх','низ') == False and player.corr >= 80 and location.id != 'loc_beach' and location.id != 'loc_pool':
+            elif player.isCover('верх','низ') == False and player.stats.corruption >= 80 and location.id != 'loc_beach' and location.id != 'loc_pool':
                 renpy.scene(layer='screens')
                 renpy.jump('naked')
             elif player.getCovPurpose('swim') and location.id != 'loc_beach' and location.id != 'loc_pool':

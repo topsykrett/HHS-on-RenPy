@@ -11,16 +11,16 @@ label shower:
     hide screen stats_screen
     $ rands = renpy.random.randint(1, 8)
     show expression ("pic/events/bathroom/%d.jpg" % rands) at top
-    
-    if player.dirty == 0:
+
+    if player.stats.dirty == 0:
         'Вы искупались, хотя и не были особо грязными. Как же Вам нравится стоять под нежными струями воды или принимать ванну... Ох, это особое чувство чистоты!'
     else:
         'Вы смыли с себя запах немытого тела. Как же Вам нравится стоять под нежными струями воды или принимать ванну... Ох, это особое чувство чистоты!'
-    
+
     if player.isSperm() > 0:
         $temp = player.printSperm()
         'Теперь [temp] больше не в сперме.'
-    
+
     $changetime(15)
     $player.cleanAll()
     $move(curloc)
@@ -47,7 +47,7 @@ label cleanFace:
         'Да мне и так хорошо!':
             pass #просто пропуск
     $ move(curloc) #Возврат на последнюю локацию
-                
+
 label cleanMouth:
     hide screen stats_screen #скрываем интерфейс
     show cleanMouth at top #Показываем картинку
@@ -57,10 +57,10 @@ label cleanMouth:
         'Выплюнуть':
             $ player.clean('рот')
             'Вы незаметно сплевываете в сторонку. Теперь у Вас чистый ротик'
-        'Проглотить' if player.corr > 20:
+        'Проглотить' if player.stats.corruption > 20:
             'Вы проглатываете тягучую сперму, и ощущаете как Ваш желудок наполняется соками Вашего последнего любовника. Вы чувствуете небольшое возбуждения и развратность этого действия.'
-            $ player.lust += 10
-            $ player.corr += 1
+            $ player.stats.lust += 10
+            $ player.stats.corruption += 1
             $ player.clean('рот')
         'Ммм Ффф ммм ууу!':
             pass
@@ -87,7 +87,7 @@ label cleanBody:
         'Да вроде бы и так неплохо выглядит!':
             pass
     $ move(curloc)
-    
+
 label cleanHands:
     hide screen stats_screen
     show cleanHands at top
@@ -98,10 +98,10 @@ label cleanHands:
             'Вы вытерли салфетками руки.'
             $ player.apply('Салфетка')
             $ player.clean('руки')
-        'Облизать' if player.corr > 40:
+        'Облизать' if player.stats.corruption > 40:
             'Вы облизали свои руки от спермы. Это было одновременно приятно и возбуждающе.'
-            $ player.lust += 10
-            $ player.corr += 2
+            $ player.stats.lust += 10
+            $ player.stats.corruption += 2
             $ player.clean('руки')
         'Само высохнет и отвалится!':
             pass
@@ -128,7 +128,7 @@ label cleanFeet:
         'Да вроде и так красиво!':
             pass
     $ move(curloc)
-    
+
 label cleanPussy:
     hide screen stats_screen
     show cleanPussy at top
@@ -139,14 +139,14 @@ label cleanPussy:
             'Отойдя в сторонку и немного присев, Вы выдавили из своей киски всю сперму прямо на салфетку. Еще раз протерев всё начисто, Вы удовлетворились результатом.'
             $ player.apply('Салфетка')
             $ player.clean('вагина')
-        'Попытаться достать её руками' if player.corr > 50:
+        'Попытаться достать её руками' if player.stats.corruption > 50:
             $changetime(10)
             'Отойдя в сторонку, вы запустили свои шаловливые пальчики, и принялись доставать из вашей киски сгустки спермы и стряхивать их на пол. Ритмичные движения пальцев в вашей щёлки не добавляют спокойствия.'
             'Через 10 минут работа была закончена, но руки оказались перемазаны в ваших соках и чужой сперме.'
             $ player.clean('вагина')
             $ player.coverSperm('руки')
-            $ player.lust += 10
-            $ player.corr += 2
+            $ player.stats.lust += 10
+            $ player.stats.corruption += 2
         'Это может и подождать.':
             pass
     $ move(curloc)
@@ -161,14 +161,14 @@ label cleanAss:
             'Отойдя в сторонку Вы аккуратно протёрли салфетками попу. Теперь все чисто.'
             $ player.apply('Салфетка')
             $ player.clean('анус')
-        'Попытаться достать её руками' if player.corr > 60:
+        'Попытаться достать её руками' if player.stats.corruption > 60:
             $changetime(10)
             'Отойдя в сторонку, вы присели на корточки и запустили свой палец в вашу заднюю дырочку. Неожиданный спазм заставил выделиться из попки не только сперму.'
             if player.hasItem('Салфетка') == True:
                 'Хорошо, что у вас оказались салфетки, которыми вы протёрли всё начисто. И стоило заморачиваться с пальцем? - подумали Вы.'
             else:
                 'К сожалению вытереть новый конфуз оказалось не чем, и теперь от вас попахивает.'
-                $ player.dirty += 1
+                $ player.stats.dirty += 1
             $ player.clean('анус')
         'Это может и подождать! Да! Наверное...':
             pass
@@ -184,24 +184,24 @@ label sleep:
         else:
             start_hour = hour
         sleeped = 0
-        while player.energy < player.health and start_hour < hour_up and sleeped < 12:
+        while player.stats.energy < player.stats.health and start_hour < hour_up and sleeped < 12:
             changetime(60)
             start_hour += 1
-            player.energy += rand(100,125)
+            player.stats.energy += rand(100,125)
             sleeped += 1
         player.reset()
         last_sleeped = ptime
         if rand(1,3) > 2:
             tryEvent('loc_dreams')
         renpy.jump('loc_dreams')
-        
+
 label loc_dreams:
     hide screen show_stats
     $ rands = rand(1,11)
     show expression ("pic/locations/home/dream/no%d.jpg" % rands) at top
     'В это раз Вам ничего не снилось и, провалившись в ласковые объятия сна, Вы отлично выспались.'
     $ move('loc_bedroom')
-    
+
 label naked:
     if player.getCovPurpose('swim'):
         show expression ("pic/events/various/bikini.png") at top
@@ -210,4 +210,3 @@ label naked:
 
     player.say 'Я не могу выходить на улицу в таком виде!!!'
     $ move(prevloc)
-    

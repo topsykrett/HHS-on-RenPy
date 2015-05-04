@@ -5,7 +5,7 @@ init python:
             self.id = id
             self.corr = corr
             self.type = type
-    
+
     def dialogueParser():
         _locs = renpy.get_all_labels()
         textList = []
@@ -17,47 +17,17 @@ init python:
                 tempText = Dialogue(id = textLable, corr = int(corr), type = type)
                 textList.append(tempText)
         return textList
-    
+
     dialogueList = dialogueParser()
-    
+
     def dialogueSelector(speaker):
         tempList = []
         for x in dialogueList:
-            if speaker.corr >= x.corr and ((speaker in studs and x.type == 'stud') or (speaker in teachers and x.type == 'teacher')):
+            if speaker.stats.corruption >= x.corr and ((speaker in studs and x.type == 'stud') or (speaker in teachers and x.type == 'teacher')):
                 tempList.append(x)
         return tempList[rand(0,len(tempList) - 1)].id
 
-    dummy = Char(
-        fname = '',
-        lname = '',
-        age = 0,
-        sex = '',
-        bsize = 0,
-        psize = 0,
-        vsize = 0,
-        asize = 0,
-        height = 0,
-        color = '#269AFF',
-        loy = 0,
-        fun = 0,
-        inventory = [],
-        wear = [],
-        corr = 0,
-        lust = 0,
-        will = 0,
-        edu = 0,
-        club = '',
-        picto = 'pic/events/teachers/55/picto.png',
-        health = 0,
-        energy = 0,
-        intel = 0,
-        location = curloc,
-        money = 0,
-        beauty = 0,
-        dirty = 0,
-        rep = 0,
-        body = []
-    )
+    dummy = Char()
     interactionObj = ''
     lastView = 'locationPeoplePicto'
     showHover = dummy
@@ -82,13 +52,13 @@ label locationPeople:
         # hbox:
             # textbutton 'Назад' action [Hide('charInfoLeft'), Show('stats_screen'), Function(move, curloc)]
             # textbutton 'Картинки' action [SetVariable('lastView','locationPeoplePicto'), Show('locationPeoplePicto')]
-        
+
 
 screen locationPeoplePicto:
     tag interface
     fixed xpos 0.01 ypos 0.01:
         textbutton 'Назад' action Function(move, curloc)
-        
+
         $ xalig = 0.2
         $ yalig = 0.05
         for x in getLoc(curloc).people:
@@ -98,7 +68,7 @@ screen locationPeoplePicto:
             if xalig >= 0.99:
                 $ yalig += 0.15
                 $ xalig = 0.2
-                
+
 screen show_stat():
     tag interface
     fixed xpos 0.1 ypos 0.1:
@@ -107,60 +77,61 @@ screen show_stat():
                 add showHover.picto[:23] + '1.png'
             else :
                 add showHover.picto
-                 
+
             $ x = interactionObj
             null height 10
-            text '[showHover.name]' style style.my_text
-            if showHover.bsize > 0: 
-                $ temp = round(showHover.bsize,1)
+            $ name = showHover.fullName()
+            text '[name]' style style.my_text
+            if showHover.body.parts['грудь'].size > 0:
+                $ temp = round(showHover.body.parts['грудь'].size, 1)
                 text 'Размер груди [temp]' style style.my_text
-            $ temp = round(showHover.height,1)
+            $ temp = round(showHover.body.height, 1)
             text 'Рост [temp]' style style.my_text
-            $ temp = round(showHover.edu,1)
+            $ temp = round(showHover.stats.education, 1)
             text 'Образование [temp]' style style.my_text
-            $ temp = round(showHover.fun,1)
+            $ temp = round(showHover.stats.fun, 1)
             text 'Счастье [temp]' style style.my_text
-            $ temp = round(showHover.loy,1)
+            $ temp = round(showHover.stats.loyalty, 1)
             text 'Лояльность [temp]' style style.my_text
-            $ temp = round(showHover.corr,1)
+            $ temp = round(showHover.stats.corruption, 1)
             text 'Развратность [temp]' style style.my_text
-            $ temp = round(showHover.beauty,1)
+            $ temp = round(showHover.stats.beauty, 1)
             text 'Красота [temp]' style style.my_text
             null height 10
-           
+
     fixed xpos 0.3 ypos 0.1 :
         vbox xmaximum config.screen_width/2:
             text textgen(showHover) style style.my_text
-    
+
     fixed xpos 0.8 ypos 0.1:
         vbox:
-            textbutton 'Поговорить' xminimum 200 action Jump('speak') 
+            textbutton 'Поговорить' xminimum 200 action Jump('speak')
             textbutton 'Флирт' xminimum 200 action Jump('flirt')
             textbutton 'Назад' xminimum 200 action Function(move,curloc)
-      
+
 label speak:
-    if lt() > 0 or lt() == -2: 
+    if lt() > 0 or lt() == -2:
         $ renpy.jump('exitInteraction')
     $ user = showHover
     $ changetime(10)
-    $ player.energy -= rand(5,10)
-    $ user.loy += 0.5
+    $ player.stats.energy -= rand(5,10)
+    $ user.stats.loyalty += 0.5
     $ renpy.jump(dialogueSelector(user))
-    
+
     call screen show_stat
-    
+
 label flirt:
-    if lt() > 0 or lt() == -2: 
+    if lt() > 0 or lt() == -2:
         $ renpy.jump('exitInteraction')
-        
+
     $ user = showHover
-    
+
     player.say 'Ого какие сиськи!'
     user.say 'Ага!'
-    
+
     call screen show_stat
 
 label exitInteraction:
     showHover.say 'Простите, мне пора на урок!'
-    
+
     $ move(curloc)

@@ -15,23 +15,13 @@ init -2 python:
     _allChars = []
     _teachers = []
     #будущий массив студентов
-    #Массивы имён
-    fn_male = ['Александр','Андрей','Владимир','Алексей','Дмитрий','Николай','Евгений','Иван','Михаил','Егор','Тимур','Руслан','Максим','Даниил','Кирилл','Никита','Денис','Илья','Артем','Артур','Роман','Богдан','Глеб','Захар','Владислав','Ян','Павел','Юрий','Антон','Игорь','Степан','Вадим','Семен','Лев','Федор','Филипп','Виктор','Виталий','Олег']
-    fn_female = ['Софья','Мария','Анастасия','Дарья','Анна','Елизавета','Полина','Виктория','Екатерина','Варвара','Ксения','Александра','Алиса','Вероника','Арина','Валерия','Маргарита','Василиса','Ульяна','Алина','Милана','Ева','Алёна','Юлия','Диана','Кристина','Ольга','Вера','Татьяна','Ирина','Яна','Елена','Евгения','Ангелина','Марина','Светлана','Надежда','Олеся','Наталья','Ника']
-    ln = ['Смирнов','Иванов','Кузнецов','Попов','Соколов','Козлов','Новиков','Морозов','Петров','Волков','Соловьев','Васильев','Зайцев','Павлов','Семенов','Голубев','Виноградов','Богданов','Воробьев','Федоров','Михайлов','Беляев','Тарасов','Белов','Комаров','Орлов','Киселев','Макаров','Андреев','Ковалев','Ильин','Гусев','Титов','Кузьмин','Кудрявцев','Баранов','Куликов','Алексеев','Степанов','Яковлев']
-    #Массив полов
-    lsex = ['male','female','futa']
     #Массив картинок
     for x in range (1,31):
         picto_m.append('pic/events/students/picto/male/%d.jpg' % x)
-        
+
     for x in range (1,41):
         picto_f.append('pic/events/students/picto/female/%d.jpg' % x)
-    #определение длинн массивов.
-    end_fn_male = len(fn_male) - 1 
-    end_fn_female = len(fn_female) - 1 
-    end_ln = len(ln) - 1 
-    
+
 #####################################################
 #Генерация директора
 #####################################################
@@ -67,7 +57,7 @@ label gendir:
             jump history
         "Закончить" if answer == [1,1,1,1,1]:
             jump skipall
-            
+
 label history:
     menu:
         "Младенчество" if answer[0] == 0:
@@ -188,7 +178,7 @@ label history:
         "Сбросить историю":
             $ answer = [0,0,0,0,0]
             jump history
-            
+
 label selchar:
     show white
     call screen char_select
@@ -198,360 +188,231 @@ label skipall:
 #####################################################
 #Создание директора
 #####################################################
+        playerBody = FemaleBody(175)
+        playerBody.parts['грудь'].size = _bsize
+        playerBody.parts['анус'].size = _anus
+        playerBody.parts['вагина'].size = _vagina
+
+        playerStats = Stats(
+            corruption = _corr,
+            lust = _corr / 10,
+            education  = _intel / 2,
+            intelligence = _intel,
+            health = _health,
+            energy = _health,
+            beauty = _beauty,
+        )
+
         player = Char(
             fname = _fname,
             lname = _lname,
             age = _age,
-            sex = lsex[1],
-            bsize = _bsize,
-            psize = 0,
-            vsize = _vagina,
-            asize = _anus,
-            height = 175,
+            body = playerBody,
+            stats = playerStats,
             color = '#5A20F7',
-            loy = 0,
-            fun = 0,
             inventory = [],
             wear = [],
-            corr = _corr,
-            lust = _corr/10,
-            will = 0,
-            edu = _intel/2,
             club = '',
             picto = _picture,
-            energy = _health,
-            health = _health,
-            intel = _intel,
             location = curloc,
-            money = _money,
-            beauty = _beauty,
-            dirty = 0,
-            rep = 0,
-            body = genBody()
-            )
+            money = _money
+        )
         player.addItems('Салфетка', 'Сырая еда', jaket.name, longSkirt.name, browntights.name, simpleUnderwear.name)
-        player.say = Character (player.name, kind=adv, dynamic = False, color = player.color, show_side_image = Image(player.picto, xalign=0.0, yalign=1.0, yanchor="center"), window_left_padding = 170)
+        player.say = Character (player.fullName(), kind=adv, dynamic = False, color = player.color, show_side_image = Image(player.picto, xalign=0.0, yalign=1.0, yanchor="center"), window_left_padding = 170)
 #####################################################
 #Генерация и создание студентов
 #####################################################
         for x in range(1,students+1):
             #выбор пола
             _rand = rand(1, 10)
+            sex = ''
             if _rand < 5:
-                _sex = lsex[0]
+                sex = 'female'
             elif _rand == 6:
-                _sex = lsex[2]
+                sex = 'futa'
             else:
-                _sex = lsex[1]
-            #Если мальчик
-            if _sex == lsex[0]:
-                _fname = fn_male[rand(0,end_fn_male)]
-                _lname = ln[rand(0,end_ln)]
-                _age = rand(12,16)
-                _bsize = 0
-                _psize = randf(10,15)
-                _vsize = 0
-                _asize = randf(0,1)
-                _height = rand(140,170)
-                _color = '#269AFF'
-                _loy = randf(0,10)
-                _fun = randf(10,20)
-                _inventory = []
-                _wear = []
-                _corr = randf(0,5)
-                _lust = randf(0,5)
-                _will = randf(0,100)
-                _intel = randf(0,100)
-                _edu = _intel/4
-                _club = ''
-                _picto = picto_m[rand(0,len(picto_m) - 1 )]
-                picto_m.remove(_picto)
-                _health = randf(800,1200)
-                _energy = _health
-            #Девочка
-            if _sex == lsex[1]:
-                _fname = fn_female[rand(0,end_fn_female)]
-                _lname = ln[rand(0,end_ln)]+'а'
-                _age = rand(12,16)
-                _bsize = randf(0,3)
-                _psize = 0
-                _vsize = randf(0,1)
-                _asize = randf(0,1)
-                _height = rand(140,170)
-                _color = '#FF85F1'
-                _loy = randf(0,10)
-                _fun = randf(10,20)
-                _inventory = []
-                _wear = []
-                _corr = randf(0,5)
-                _lust = randf(0,5)
-                _will = randf(0,100)
-                _intel = randf(0,100)
-                _edu = _intel/4
-                _club = ''
-                _picto = picto_f[rand(0,len(picto_f) - 1 )]
-                picto_f.remove(_picto)
-                _health = randf(800,1200)
-                _energy = _health
-            #Фута
-            if _sex == lsex[2]:
-                _fname = fn_female[rand(0,end_fn_female)]
-                _lname = ln[rand(0,end_ln)]+'а'
-                _age = rand(12,16)
-                _bsize = randf(0,3)
-                _psize = randf(10,15)
-                _vsize = randf(0,1)
-                _asize = randf(0,1)
-                _height = rand(140,170)
-                _color = '#FC3A3A'
-                _loy = randf(0,10)
-                _fun = randf(10,20)
-                _inventory = []
-                _wear = []
-                _corr = randf(0,5)
-                _lust = randf(0,5)
-                _will = randf(0,100)
-                _intel = randf(0,100)
-                _edu = _intel/4
-                _club = ''
-                _picto = picto_f[rand(0,len(picto_f) - 1 )]
-                picto_f.remove(_picto)
-                _health = randf(800,1200)
-                _energy = _health
-            #Создание объекта из сгенерированных кусков
-            temp_char = Char(
-                fname = _fname,
-                lname = _lname,
-                age = _age,
-                sex = _sex,
-                bsize = _bsize,
-                psize = _psize,
-                vsize = _vsize,
-                asize = _asize,
-                height = _height,
-                color = _color,
-                loy = _loy,
-                fun = _fun,
-                inventory = _inventory,
-                wear = _wear,
-                corr = _corr,
-                lust = _lust,
-                will = _will,
-                edu = _edu,
-                club = _club,
-                picto = _picto,
-                energy = _energy,
-                health = _health,
-                intel = _intel,
-                location = 'street',
-                money = rand(0,100),
-                beauty = rand(30,85),
-                dirty = 0,
-                rep = 50,
-                body = genBody()
-                )
-            #Добавление объекта к массиву студентов
-            _studs.append(temp_char)
-            
+                sex = 'male'
+
+            picto = choice(picto_m) if sex == 'male' else choice(picto_f)
+            _studs.append(Char.random(sex, picto))
+
 #######################################################
 #Создание учителей
 #######################################################
+
         kupruvna = Char(
             fname = 'Валентина',
             lname = 'Купрувна',
             age = 37,
-            sex = 'female',
-            bsize = 5,
-            psize = 0,
-            vsize = 8,
-            asize = 0,
-            height = 170,
+            body = FemaleBody(
+                175,
+                breastSize = 5,
+                vaginaSize = 8
+            ),
+            stats = Stats(
+                will = 25,
+                education = 60,
+                intelligence = 50,
+                beauty = 40,
+                health = 1000,
+                energy = 1000,
+                loyalty = randf(10, 20),
+                fun = randf(0, 50)
+            ),
             color = '#FF85F1',
-            loy = randf(10,20),
-            fun = randf(0,50),
             inventory = [],
             wear = [],
-            corr = 0,
-            lust = 0,
-            will = 25,
-            edu = 60,
             club = 'химия',
             picto = 'pic/events/teachers/50/picto.png',
-            health = 1000,
-            energy = 1000,
-            intel = 50,
             location = curloc,
-            money = 10000,
-            beauty = 40,
-            dirty = 0,
-            rep = 0,
-            body = genBody()
-            )
+            money = 10000
+        )
         _teachers.append(kupruvna)
-        
+
         danokova = Char(
             fname = 'Полина',
             lname = 'Данокова',
             age = 25,
-            sex = 'female',
-            bsize = 2,
-            psize = 0,
-            vsize = 5,
-            asize = 0,
-            height = 160,
+            body = FemaleBody(
+                160,
+                breastSize = 2,
+                vaginaSize = 5
+            ),
+            stats = Stats(
+                will = 45,
+                education = 20,
+                intelligence = 100,
+                beauty = 60,
+                health = 1000,
+                energy = 1000,
+                loyalty = randf(10, 20),
+                fun = randf(0, 50)
+            ),
             color = '#FF85F1',
-            loy = randf(10,20),
-            fun = randf(0,50),
             inventory = [],
             wear = [],
-            corr = 0,
-            lust = 0,
-            will = 45,
-            edu = 20,
             club = 'биология',
             picto = 'pic/events/teachers/51/picto.png',
-            health = 1000,
-            energy = 1000,
-            intel = 100,
             location = curloc,
-            money = 5000,
-            beauty = 60,
-            dirty = 0,
-            rep = 0,
-            body = genBody()
-            )
+            money = 5000
+        )
         _teachers.append(danokova)
-        
+
         frigidovna = Char(
             fname = 'Ангелина',
             lname = 'Фригидовна',
             age = 32,
-            sex = 'female',
-            bsize = 6,
-            psize = 0,
-            vsize = 0,
-            asize = 0,
-            height = 175,
+            body = FemaleBody(
+                175,
+                breastSize = 6
+            ),
+            stats = Stats(
+                will = 30,
+                education = 15,
+                intelligence = 40,
+                beauty = 40,
+                health = 1000,
+                energy = 1000,
+                loyalty = randf(10, 20),
+                fun = randf(0, 50)
+            ),
             color = '#FF85F1',
-            loy = randf(10,20),
-            fun = randf(0,50),
             inventory = [],
             wear = [],
-            corr = 0,
-            lust = 0,
-            will = 30,
-            edu = 15,
             club = 'сексуальное просвящение',
             picto = 'pic/events/teachers/52/picto.png',
-            health = 1000,
-            energy = 1000,
-            intel = 40,
             location = curloc,
-            money = 5000,
-            beauty = 40,
-            dirty = 0,
-            rep = 0,
-            body = genBody()
-            )
+            money = 5000
+        )
         _teachers.append(frigidovna)
-        
+
         bissektrisovna = Char(
             fname = 'Валентина',
             lname = 'Биссектрисовна',
             age = 35,
-            sex = 'female',
-            bsize = 3,
-            psize = 0,
-            vsize = 8,
-            asize = 0,
-            height = 165,
+            body = FemaleBody(
+                165,
+                breastSize = 3,
+                vaginaSize = 8
+            ),
+            stats = Stats(
+                will = 60,
+                education = 60,
+                intelligence = 40,
+                beauty = 85,
+                health = 1000,
+                energy = 1000,
+                loyalty = randf(10, 20),
+                fun = randf(0, 50)
+            ),
             color = '#FF85F1',
-            loy = randf(10,20),
-            fun = randf(0,50),
             inventory = [],
             wear = [],
-            corr = 0,
-            lust = 0,
-            will = 60,
-            edu = 60,
             club = 'математика',
             picto = 'pic/events/teachers/53/picto.png',
-            health = 1000,
-            energy = 1000,
-            intel = 40,
             location = curloc,
-            money = 5000,
-            beauty = 85,
-            dirty = 0,
-            rep = 0,
-            body = genBody()
-            )
+            money = 5000
+        )
         _teachers.append(bissektrisovna)
-        
+
         dikovna = Char(
             fname = 'Анжела',
             lname = 'Диковна',
             age = 23,
-            sex = 'futa',
-            bsize = 5,
-            psize = 20,
-            vsize = 8,
-            asize = 4,
-            height = 180,
+            body = FutaBody(
+                180,
+                breastSize = 5,
+                vaginaSize = 8,
+                anusSize = 4,
+                penisSize = 20
+            ),
+            stats = Stats(
+                corruption = 20,
+                will = 30,
+                education = 50,
+                intelligence = 50,
+                beauty = 60,
+                health = 1000,
+                energy = 1000,
+                loyalty = randf(10, 20),
+                fun = randf(0, 50)
+            ),
             color = '#FC3A3A',
-            loy = randf(10,20),
-            fun = randf(0,50),
             inventory = [],
             wear = [],
-            corr = 20,
-            lust = 0,
-            will = 30,
-            edu = 50,
             club = 'английский язык',
             picto = 'pic/events/teachers/54/picto.png',
-            health = 1000,
-            energy = 1000,
-            intel = 50,
             location = curloc,
-            money = 5000,
-            beauty = 60,
-            dirty = 0,
-            rep = 0,
-            body = genBody()
-            )
+            money = 5000
+        )
         _teachers.append(dikovna)
 
         mustangovich = Char(
             fname = 'Ахмед',
             lname = 'Мустангович',
             age = 22,
-            sex = 'male',
-            bsize = 0,
-            psize = 30,
-            vsize = 0,
-            asize = 0,
-            height = 190,
+            body = MaleBody(
+                190,
+                penisSize = 30
+            ),
+            stats = Stats(
+                will = 15,
+                education = 300,
+                intelligence = 40,
+                beauty = 40,
+                health = 1500,
+                energy = 1500,
+                loyalty = randf(40, 60),
+                fun = randf(0, 50)
+            ),
             color = '#269AFF',
-            loy = randf(40,60),
-            fun = randf(0,50),
             inventory = [],
             wear = [],
-            corr = 0,
-            lust = 0,
-            will = 15,
-            edu = 300,
             club = 'физкультура',
             picto = 'pic/events/teachers/55/picto.png',
-            health = 1500,
-            energy = 1500,
-            intel = 40,
             location = curloc,
-            money = 200,
-            beauty = 40,
-            dirty = 0,
-            rep = 0,
-            body = genBody()
-            )
+            money = 200
+        )
         _teachers.append(mustangovich)
 #######################################################
 #Пересохранение этого добра для того, чтобы сохранялось.
@@ -562,4 +423,3 @@ label skipall:
     $ studs = _studs
     $ teachers = _teachers
     $ move("loc_home")
-   
