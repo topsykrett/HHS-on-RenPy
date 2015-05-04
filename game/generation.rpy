@@ -232,8 +232,14 @@ label skipall:
                 sex = 'futa'
             else:
                 sex = 'male'
-
-            picto = choice(picto_m) if sex == 'male' else choice(picto_f)
+            
+            if sex == 'male':
+                picto = choice(picto_m) 
+                picto_m.remove(picto)
+            else :
+                picto = choice(picto_f)
+                picto_f.remove(picto)
+            
             _studs.append(Char.random(sex, picto))
 
 #######################################################

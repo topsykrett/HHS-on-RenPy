@@ -148,6 +148,7 @@ init -20 python:
             stats.education = stats.intelligence / 4
             stats.health = randf(800, 1200)
             stats.energy = stats.health
+            stats.reputation = 50
             return stats
 
     class Char(object):
@@ -164,6 +165,8 @@ init -20 python:
         def __init__(self, fname = '', lname = '', color = '#FFFFFF', age = 0, body = Body(), stats = Stats(), inventory = [], wear = [], club = '', picto = '', location = '', money = 0):
             self.fname = fname
             self.lname = lname
+            self.name = fname + ' ' + lname
+            self.sex = body.sex()
             self.age = age
             self.body = body
             self.stats = stats
@@ -176,7 +179,7 @@ init -20 python:
             self.money = money
             self.say = Character (self.fullName(), kind=adv, dynamic = False, color = self.color, show_side_image = Image(self.picto, xalign=0.0, yalign=1.0), window_left_padding = 170)
             config.side_image_tag = self.picto
-
+        
         # Создание случайного персонажа с полом sex ('male', 'female' или 'futa') и картинкой picto
         @classmethod
         def random(cls, sex, picto):
@@ -400,15 +403,6 @@ init -20 python:
                             self.wear.remove(y)
                             self.inventory.append(y)
                             break
-
-
-            # for item in self.wear:
-                # for cov in item.cover:
-                    # if cloth.cover.count(cov) > 0 or cloth.cover[0] == 'all':
-                        # self.wear.remove(item)
-                        # self.inventory.append(item)
-                        # break
-
             if rand(1,100) > 90:
                 cloth.durability -= 1
             self.inventory.remove(cloth)

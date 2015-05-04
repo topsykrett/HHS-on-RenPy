@@ -43,7 +43,7 @@ screen charInfoLeft:
             add showHover.picto
             null height 10
             $ playerName = player.fullName()
-            text '[playerName]' style style.my_text
+            text '[showHover.name]' style style.my_text
             $ bsize = showHover.body.parts['грудь'].size
             if bsize > 0:
                 $ temp = round(bsize, 1)
